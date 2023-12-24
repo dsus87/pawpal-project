@@ -30,7 +30,7 @@ const userSchema = new Schema(
       type: String,
     },
     photo:{ 
-      Type: String,
+      type: String,
     },
     role: {
         type: String, 
