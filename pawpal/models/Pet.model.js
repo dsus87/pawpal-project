@@ -1,3 +1,6 @@
+
+const mongoose = require('mongoose');
+
 const { Schema, model } = require("mongoose");
 
 const petSchema = new Schema({
@@ -21,3 +24,5 @@ const petSchema = new Schema({
   });
   
   const Pet = mongoose.model('Pet', petSchema);
+
+  module.exports = Pet;

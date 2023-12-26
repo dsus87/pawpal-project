@@ -1,0 +1,52 @@
+<div id="form">
+
+  <h2>Sign Up</h2>
+
+  <form action="/signup" method="POST">
+
+    <label for="username"> Username
+      <input type="text" name="username" id="username" placeholder="Your username" required/>
+    </label>
+
+    <label for="email"> Email
+      <input type="email" name="email" id="email" placeholder="Your email" required/>
+    </label>
+
+    <label for="password"> Password
+      <input type="password" name="password" id="password" placeholder="Your password" required/>
+    </label>
+
+    <label for="name"> Name
+      <input type="text" name="name" id="name" placeholder="Your name" required/>
+    </label>
+
+    <label for="location"> Location
+      <input type="text" name="location" id="location" placeholder="Your location" />
+    </label>
+
+    <label for="photo"> Photo URL
+      <input type="text" name="photo" id="photo" placeholder="URL of your photo" />
+    </label>
+
+    <label for="role"> Role
+      <select name="role" id="role" required>
+        <option value="Pet-sitter">Pet-sitter</option>
+        <option value="Pet-owner">Pet-owner</option>
+      </select>
+    </label>
+
+    <label for="availability"> Availability
+      <select name="availability" id="availability">
+        <option value="Available">Available</option>
+        <option value="Unavailable">Unavailable</option>
+      </select>
+    </label>
+
+  
+    <button type="submit">Sign Up</button>
+
+    {{#if errorMessage}}
+      <p class="error">{{errorMessage}}</p>
+    {{/if}}
+  </form>
+</div>
