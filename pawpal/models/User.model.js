@@ -19,10 +19,10 @@ const userSchema = new Schema(
       lowercase: true,
       trim: true,
     },
-    password: {
-      type: String,
-      required: [true, "Password is required."],
-    },
+    // password: {
+    //   type: String,
+    //   required: [true, "Password is required."],
+    // },
     name: {
       type: String,
       required: [true, "Name is required."],

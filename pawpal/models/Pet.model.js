@@ -16,7 +16,7 @@ const petSchema = new Schema({
       enum: ['Playful', 'Energetic', 'Couch Potato'] 
     },
     healthAndDiet: String,
-    photo: String,
+    // photo: String,
     comments: [{ 
       type: Schema.Types.ObjectId, 
       ref: 'Comment' 
