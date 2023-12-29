@@ -4,14 +4,17 @@ const express = require('express');
 const router = express.Router();
 
 const User = require("../models/User.model");
+const { isLoggedIn, isLoggedOut } = require('../middlewares/route-guard');
+
 
 /* GET Signup page */
-router.get("/signup", (req, res, next) => {
+router.get("/signup",isLoggedOut, (req, res, next) => {
+    console.log("req.session",req.session)
     res.render("auth/signup")
 });
 
 /* POST Signup  */
-router.post("/signup", (req, res, next) => {
+router.post("/signup", isLoggedOut, (req, res, next) => {
 
     const { username, email, password, name, location, role, availability, services, pets, reviews } = req.body;
 
@@ -21,19 +24,22 @@ router.post("/signup", (req, res, next) => {
         return User.create({ username, email, password: hash, name, location, role, availability, services, pets, reviews })
     })
     .then(user => {
-        res.render("auth/profile", { user: user });
+        req.session.currentUser = user;
+        res.render('auth/profile', user);
     })
 .catch(err => console.log(err))
 
 });
 
 /* GET Profile page */
-router.get("/profile/:username", (req, res, next) => {
-    const requestedUsername = req.params.username;
-    User.findOne({ username: requestedUsername })
+router.get("/profile/:username", isLoggedIn, (req, res, next) => {
+    const currentUser = req.session.currentUser;
+         User.findOne({ username: currentUser.username })
         .then(user => {
             if (user) {
-                res.render("auth/profile", { user: user });
+                req.session.currentUser = user;
+                res.render('auth/profile', user);
+                //res.redirect(`/profile/${user.username}`);
             } else {
                 res.render("error", { message: "User not found." });
             }
@@ -45,16 +51,17 @@ router.get("/profile/:username", (req, res, next) => {
 
 
 
-/* GET Log in  page */
 
-router.get("/login", (req, res, next)  =>{
+
+/* GET Log in  page */
+router.get("/login",isLoggedOut, (req, res, next)  =>{
     res.render("auth/login", {errorMessage: 'Password is incorrect'})
 })
 
 
 /* POST Log in  page */
 
-router.post("/login", (req, res)=>{
+router.post("/login",isLoggedOut,  (req, res)=>{
 
     const { email, password } = req.body;
  
@@ -65,7 +72,7 @@ router.post("/login", (req, res)=>{
     return;
   }
 
-  User.findOne({ email }) // --> {email: ..., password:....} || null
+  User.findOne({ email }) 
   .then(user => {
       if (!user) {
           console.log("Email not registered.");
@@ -76,7 +83,8 @@ router.post("/login", (req, res)=>{
       bcrypt.compare(password, user.password)
           .then(match => {
               if (match) {
-                res.redirect(`/profile/${user.username}`);
+                req.session.currentUser = user;
+                res.render('auth/profile', user);
               } else {
                   console.log("Incorrect password.");
                   res.render('auth/login', { errorMessage: 'Incorrect email and/or password.' });
@@ -92,5 +100,26 @@ router.post("/login", (req, res)=>{
       res.render('auth/login', { errorMessage: 'Something went wrong. Please try again.' });
   });
 });
+
+
+router.post('/logout', isLoggedIn, (req, res, next) => {
+    console.log("Logout route accessed. Current session: ", req.session);
+    if (!req.session.currentUser) {
+        console.log("User already logged out, redirecting to home.");
+        res.redirect('/');
+        return;
+    }
+
+    req.session.destroy(err => {
+        if (err) {
+            console.log("Error destroying session: ", err);
+            next(err);
+        } else {
+            console.log("Session destroyed, redirecting to home.");
+            res.redirect('/');
+        }
+    });
+});
+
 
 module.exports = router;
