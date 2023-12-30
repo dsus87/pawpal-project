@@ -18,7 +18,7 @@ router.post("/signup", isLoggedOut, (req, res, next) => {
 
     const { username, email, password, name, location, role, availability, services, pets, reviews } = req.body;
 
-    bcrypt.hash(password, saltRounds) // encrypt the password
+    bcrypt.hash(password, saltRounds)
     .then((hash) => {
         console.log('hash', hash)
         return User.create({ username, email, password: hash, name, location, role, availability, services, pets, reviews })
@@ -33,13 +33,11 @@ router.post("/signup", isLoggedOut, (req, res, next) => {
 
 /* GET Profile page */
 router.get("/profile/:username", isLoggedIn, (req, res, next) => {
-    const currentUser = req.session.currentUser;
-         User.findOne({ username: currentUser.username })
+    const { username } = req.params; 
+    User.findOne({ username })
         .then(user => {
             if (user) {
-                req.session.currentUser = user;
                 res.render('auth/profile', user);
-                //res.redirect(`/profile/${user.username}`);
             } else {
                 res.render("error", { message: "User not found." });
             }
