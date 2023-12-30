@@ -28,11 +28,17 @@
       <input type="text" name="photo" id="photo" placeholder="URL of your photo" />
     </label>
 
-    <label for="role"> Role
-      <select name="role" id="role" required>
-        <option value="Pet-sitter">Pet-sitter</option>
-        <option value="Pet-owner">Pet-owner</option>
-      </select>
+        <div>
+        <input type="checkbox" id="pet-sitter" name="role" value="Pet-sitter">
+        <label for="pet-sitter">Pet-sitter</label>
+      </div>
+
+      <div>
+        <input type="checkbox" id="pet-owner" name="role" value="Pet-owner">
+        <label for="pet-owner">Pet-owner</label>
+      </div>
+
+
     </label>
 
     <label for="availability"> Availability
