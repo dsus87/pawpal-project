@@ -35,10 +35,10 @@ const userSchema = new Schema(
       type: String,
     },
     role: {
-        type: String, 
-        enum: ['Pet-sitter', 'Pet-owner'],
-        required: true,
-    },
+      type: String, 
+      enum: ['Pet-sitter', 'Pet-owner'],
+      required: true,
+  },
     availability: { 
       type: String, 
       enum: ['Available', 'Unavailable'] 

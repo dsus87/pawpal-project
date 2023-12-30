@@ -18,7 +18,7 @@ router.post("/signup", isLoggedOut, (req, res, next) => {
 
     const { username, email, password, name, location, role, availability, services, pets, reviews } = req.body;
 
-    bcrypt.hash(password, saltRounds)
+    bcrypt.hash(password, saltRounds) 
     .then((hash) => {
         console.log('hash', hash)
         return User.create({ username, email, password: hash, name, location, role, availability, services, pets, reviews })
@@ -51,7 +51,7 @@ router.get("/profile/:username", isLoggedIn, (req, res, next) => {
 
 /* GET Log in  page */
 router.get("/login",isLoggedOut, (req, res, next)  =>{
-    res.render("auth/login", {errorMessage: 'Password is incorrect'})
+    res.render("auth/login")
 })
 
 
@@ -115,6 +115,24 @@ router.post('/logout', isLoggedIn, (req, res, next) => {
             res.redirect('/');
         }
     });
+});
+
+
+/* POST Profile Page  */
+router.post('/update-profile', isLoggedIn, (req, res, next) => {
+    const { username, email, name, location } = req.body;
+    const userId = req.session.currentUser._id;
+
+    User.findByIdAndUpdate(userId, { username, email, name, location }, { new: true })
+        .then(updatedUser => {
+            // Update the session information
+            req.session.currentUser = updatedUser;
+            res.redirect('/profile/' + updatedUser.username);
+        })
+        .catch(err => {
+            console.log(err);
+            res.render("error", { message: "An error occurred during the update." });
+        });
 });
 
 
