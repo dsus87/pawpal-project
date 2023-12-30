@@ -51,8 +51,6 @@ router.get("/profile/:username", isLoggedIn, (req, res, next) => {
 
 
 
-
-
 /* GET Log in  page */
 router.get("/login",isLoggedOut, (req, res, next)  =>{
     res.render("auth/login", {errorMessage: 'Password is incorrect'})

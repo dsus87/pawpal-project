@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const isLoggedIn = require('../middlewares/isLoggedIn'); //check if a user is logged in.
+const User = require("../models/User.model");
+const { isLoggedIn, isLoggedOut } = require('../middlewares/route-guard');
+
 const PetSitter = require('../models/PetSitter.model'); //Model representing a pet sitter.
 
 // Route to display all pet sitters
