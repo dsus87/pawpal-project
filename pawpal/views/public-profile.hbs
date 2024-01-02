@@ -1,8 +1,26 @@
-<h1>{{appTitle}} 🚀</h1>
-<p>My Public Profile Page</p>
-
-{{#if user.photo}}
-<img src="/{{user.photo}}" alt="User profile photo">
+{{!-- Check for an error message --}}
+{{#if errorMessage}}
+    <div style="color: red; margin-bottom: 10px;">{{errorMessage}}</div>
 {{/if}}
 
 
+{{#if username}}
+
+
+    <h1>Welcome to {{username}}'s profile page!</h1>
+
+    {{#if photo}}
+        <img src="/{{photo}}" alt="Profile Picture" style="width: 300px; height: 400px;">
+    {{else}}
+        <p>No profile picture available.</p>
+    {{/if}}
+
+    <div>
+        <strong>Username:</strong> {{username}}<br>
+        <strong>Email:</strong> {{email}}<br>
+        <strong>Name:</strong> {{name}}<br>
+        <strong>Location:</strong> {{location}}<br>
+    </div>
+{{else}}
+    <p>Username not provided.</p>
+{{/if}}

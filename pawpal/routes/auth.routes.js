@@ -25,7 +25,17 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
 router.post("/signup", isLoggedOut, upload.single('photo'), (req, res, next) => {
     const { username, email, password, name, location, role, availability, services, pets, reviews } = req.body;
 
-    bcrypt.hash(password, saltRounds) 
+    User.findOne({ username: username })
+    .then(user => {
+        if (user) {
+            // If a user with the same username exists, render an error message
+            return res.render("auth/signup", { errorMessage: "Username already taken." });
+        } else {
+            // If username is not taken, proceed to hash the password
+            return bcrypt.hash(password, saltRounds);
+        }
+    })
+
     .then((hash) => {
         const userData = { username, email, password: hash, name, location, role, availability, services, pets, reviews };
         
@@ -63,6 +73,8 @@ router.get("/auth/profile/:username", isLoggedIn, (req, res, next) => {
         });
 });
 
+
+
 /* POST Private Profile Page  */
 router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, next) => {
     const { username, email, password, name, location, role, availability, services, pets, reviews } = req.body;
@@ -94,6 +106,27 @@ router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, ne
             res.render("error", { message: "An error occurred during the update." });
         });
 });
+
+
+/* GET Public Profile page */
+router.get("/profile/:username",upload.single('photo'), (req, res, next) => {
+    const { username } = req.params;
+    console.log("Username:", username);  
+    User.findOne({ username })
+        .then(user => {
+            console.log("Found user:", user); 
+            if (user) {
+                res.render('public-profile', user.toObject());
+            } else {
+                res.render("error", { message: "User not found." });
+            }
+        })
+        .catch(err => {
+            console.log("Error:", err); 
+            res.render("error", { message: "An error occurred. Please try again later." });
+        });
+});
+
 
 
 
@@ -145,6 +178,7 @@ router.post("/login",isLoggedOut, (req, res)=>{
   });
 });
 
+/* POST Logout page */
 
 router.post('/logout', isLoggedIn, (req, res, next) => {
     console.log("Logout route accessed. Current session: ", req.session);
@@ -198,7 +232,6 @@ router.post("/auth/pet-signup", isLoggedIn, upload.single('photo'), (req, res, n
 
     const petData = { name, animal, breed, age, temperament, about, healthAndDiet };
 
-    // If a photo is uploaded, include it in the pet data
     if (req.file) {
         petData.photo = req.file.path;
     }
