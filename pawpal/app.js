@@ -32,6 +32,8 @@ app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
      next();
  });
 
+ app.use('/uploads', express.static('uploads'));
+
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
 app.use("/", indexRoutes);

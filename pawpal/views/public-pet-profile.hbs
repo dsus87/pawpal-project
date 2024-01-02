@@ -1,4 +1,7 @@
 <h1>{{pet.name}}'s Profile</h1>
+{{#if pet.photo}}
+<img src="/{{pet.photo}}" alt="User profile photo">
+{{/if}}
 <p><strong>Animal:</strong> {{pet.animal}}</p>
 <p><strong>Breed:</strong> {{pet.breed}}</p>
 <p><strong>Age:</strong> {{pet.age}}</p>

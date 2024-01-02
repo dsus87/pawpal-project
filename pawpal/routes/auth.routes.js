@@ -3,6 +3,9 @@ const saltRounds = 10;
 const express = require('express');
 const router = express.Router();
 
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+
 const User = require("../models/User.model");
 const Pet = require("../models/Pet.model");
 const Comment = require("../models/Comment.model");
@@ -19,27 +22,35 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
 });
 
 /* POST Signup  */
-router.post("/signup", isLoggedOut, (req, res, next) => {
-
+router.post("/signup", isLoggedOut, upload.single('photo'), (req, res, next) => {
     const { username, email, password, name, location, role, availability, services, pets, reviews } = req.body;
 
     bcrypt.hash(password, saltRounds) 
     .then((hash) => {
-        console.log('hash', hash)
-        return User.create({ username, email, password: hash, name, location, role, availability, services, pets, reviews })
+        const userData = { username, email, password: hash, name, location, role, availability, services, pets, reviews };
+        
+        if (req.file) {
+            userData.photo = req.file.path;
+        }
+
+        return User.create(userData);
     })
     .then(user => {
         req.session.currentUser = user;
         res.render('auth/profile', user);
     })
-.catch(err => console.log(err))
-
+    .catch(err => {
+        console.error(err);
+        res.render("error", { message: "An error occurred during signup." });
+    });
 });
+
 
 /* GET Private Profile page */
 router.get("/profile/:username", isLoggedIn, (req, res, next) => {
     const { username } = req.params; 
     User.findOne({ username })
+        .populate('pets')  
         .then(user => {
             if (user) {
                 res.render('auth/profile', user);
@@ -62,7 +73,7 @@ router.get("/login",isLoggedOut, (req, res, next)  =>{
 
 /* POST Log in  page */
 
-router.post("/login",isLoggedOut,  (req, res)=>{
+router.post("/login",isLoggedOut, (req, res)=>{
 
     const { email, password } = req.body;
  
@@ -124,13 +135,18 @@ router.post('/logout', isLoggedIn, (req, res, next) => {
 
 
 /* POST Private Profile Page  */
-router.post('/update-profile', isLoggedIn, (req, res, next) => {
-    const { username, email, name, location } = req.body;
+router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, next) => {
+    const { username, email, password, name, location, role, availability, services, pets, reviews } = req.body;
     const userId = req.session.currentUser._id;
 
-    User.findByIdAndUpdate(userId, { username, email, name, location }, { new: true })
+    const updateData = { username, email, password, name, location, role, availability, services, pets, reviews };
+    
+    if (req.file) {
+        updateData.photo = req.file.path;
+    }
+
+    User.findByIdAndUpdate(userId, updateData, { new: true })
         .then(updatedUser => {
-            // Update the session information
             req.session.currentUser = updatedUser;
             res.redirect('/profile/' + updatedUser.username);
         })
@@ -139,7 +155,6 @@ router.post('/update-profile', isLoggedIn, (req, res, next) => {
             res.render("error", { message: "An error occurred during the update." });
         });
 });
-
 
 /* GET Public Pet Profile page */
 router.get("/pet/:_id", (req, res, next) => {
@@ -165,11 +180,18 @@ router.get("/auth/pet-signup", isLoggedIn, (req, res, next) => {
 });
 
 /* Register a new Pet (private) page */  
-router.post("/auth/pet-signup", isLoggedIn, (req, res, next) => {
+router.post("/auth/pet-signup", isLoggedIn, upload.single('photo'), (req, res, next) => {
     const { name, animal, breed, age, temperament, about, healthAndDiet } = req.body;
     let createdPetId;
 
-    Pet.create({ name, animal, breed, age, temperament, about, healthAndDiet })
+    const petData = { name, animal, breed, age, temperament, about, healthAndDiet };
+
+    // If a photo is uploaded, include it in the pet data
+    if (req.file) {
+        petData.photo = req.file.path;
+    }
+
+    Pet.create(petData)
         .then(newPet => {
             createdPetId = newPet._id;
             return User.findByIdAndUpdate(req.session.currentUser._id, { $push: { pets: createdPetId } });

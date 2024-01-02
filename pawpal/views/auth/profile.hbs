@@ -1,11 +1,12 @@
 {{#if username}}
 <h1>Welcome to your profile page {{username}}!</h1>
+    <img src="/{{photo}}" alt="Profile Picture" style="width: 300px; height: 400px;">
+
 {{else}}
   <p>Still not logged in, sorry!</p>
 {{/if}}
 
-
-<form action="/update-profile" method="POST">
+<form action="/update-profile" method="POST" enctype="multipart/form-data">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" value="{{username}}" required>
 
@@ -18,11 +19,27 @@
     <label for="location">Location:</label>
     <input type="text" id="location" name="location" value="{{location}}">
 
-    <!-- Add other fields as necessary -->
-
-  
+    <label for="photo">Upload Photo:</label>
+    <input type="file" id="photo" name="photo">
 
     <button type="button" onclick="window.location.href='/auth/pet-signup'">Register a Pet</button>
 
-   <button type="submit">Update Profile</button>
+    <button type="submit">Update Profile</button>
 </form>
+
+
+    <h2>{{username}}'s Pets</h2>
+    <ul>
+        {{#each pets}}
+            <li>
+                <strong>Name:</strong> {{this.name}}<br>
+                <strong>Animal:</strong> {{this.animal}}<br>
+                <strong>Breed:</strong> {{this.breed}}<br>
+                {{#if this.photo}}
+                    <img src="/{{this.photo}}" alt="{{this.name}}" style="width: 100px; height: 100px;">
+                {{else}}
+                    <p>No photo available.</p>
+                {{/if}}
+            </li>
+        {{/each}}
+    </ul>

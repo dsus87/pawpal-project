@@ -1,9 +1,9 @@
-
 const mongoose = require('mongoose');
 
 const { Schema, model } = require("mongoose");
 
 const petSchema = new Schema({
+  
     name: String,
     animal: { 
       type: String, 
@@ -18,12 +18,16 @@ const petSchema = new Schema({
     about: { 
       type: String, 
     },
+    photo: {
+      type: String
+    },
     healthAndDiet: String,
     // photo: String,
     comments: [{ 
       type: Schema.Types.ObjectId, 
       ref: 'Comment' 
     }]
+    
   });
   
   const Pet = mongoose.model('Pet', petSchema);

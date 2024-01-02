@@ -2,7 +2,7 @@
 
   <h2>Sign Up</h2>
 
-  <form action="/signup" method="POST">
+  <form action="/signup" method="POST" enctype="multipart/form-data">
 
     <label for="username"> Username
       <input type="text" name="username" id="username" placeholder="Your username" required/>
@@ -24,9 +24,8 @@
       <input type="text" name="location" id="location" placeholder="Your location" />
     </label>
 
-    <label for="photo"> Photo URL
-      <input type="text" name="photo" id="photo" placeholder="URL of your photo" />
-    </label>
+       <label for="photo">Upload Photo:</label>
+    <input type="file" id="photo" name="photo">
 
         <div>
         <input type="checkbox" id="pet-sitter" name="role" value="Pet-sitter">
