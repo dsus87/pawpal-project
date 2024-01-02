@@ -47,7 +47,7 @@ router.post("/signup", isLoggedOut, upload.single('photo'), (req, res, next) => 
 
 
 /* GET Private Profile page */
-router.get("/profile/:username", isLoggedIn, (req, res, next) => {
+router.get("/auth/profile/:username", isLoggedIn, (req, res, next) => {
     const { username } = req.params; 
     User.findOne({ username })
         .populate('pets')  
@@ -60,6 +60,38 @@ router.get("/profile/:username", isLoggedIn, (req, res, next) => {
         })
         .catch(err => {
             res.render("error", { message: "An error occurred. Please try again later." });
+        });
+});
+
+/* POST Private Profile Page  */
+router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, next) => {
+    const { username, email, password, name, location, role, availability, services, pets, reviews } = req.body;
+    const userId = req.session.currentUser._id;
+
+    User.findOne({ username: username, _id: { $ne: userId } })
+        .then(existingUser => {
+            if (existingUser) {
+                res.render('auth/profile', { 
+                    user: req.session.currentUser,
+                    errorMessage: "Username already taken."
+                });
+            } else {
+                const updateData = { username, email, password, name, location, role, availability, services, pets, reviews };
+                
+                if (req.file) {
+                    updateData.photo = req.file.path;
+                }
+
+                return User.findByIdAndUpdate(userId, updateData, { new: true })
+                    .then(updatedUser => {
+                        req.session.currentUser = updatedUser;
+                        res.redirect('auth/profile/' + updatedUser.username);
+                    });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.render("error", { message: "An error occurred during the update." });
         });
 });
 
@@ -134,27 +166,7 @@ router.post('/logout', isLoggedIn, (req, res, next) => {
 });
 
 
-/* POST Private Profile Page  */
-router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, next) => {
-    const { username, email, password, name, location, role, availability, services, pets, reviews } = req.body;
-    const userId = req.session.currentUser._id;
 
-    const updateData = { username, email, password, name, location, role, availability, services, pets, reviews };
-    
-    if (req.file) {
-        updateData.photo = req.file.path;
-    }
-
-    User.findByIdAndUpdate(userId, updateData, { new: true })
-        .then(updatedUser => {
-            req.session.currentUser = updatedUser;
-            res.redirect('/profile/' + updatedUser.username);
-        })
-        .catch(err => {
-            console.log(err);
-            res.render("error", { message: "An error occurred during the update." });
-        });
-});
 
 /* GET Public Pet Profile page */
 router.get("/pet/:_id", (req, res, next) => {
