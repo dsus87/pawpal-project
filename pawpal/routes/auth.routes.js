@@ -250,4 +250,11 @@ router.post("/auth/pet-signup", isLoggedIn, upload.single('photo'), (req, res, n
 });
 
 
+/* GET Pet (private) page */
+router.get("/auth/pet-profile/:_id", isLoggedIn, (req, res, next) => {
+    res.render('auth/pet-signup', { title: "Pet Profile" });
+});
+
+
+
 module.exports = router;
