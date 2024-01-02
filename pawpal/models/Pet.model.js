@@ -15,6 +15,9 @@ const petSchema = new Schema({
       type: String, 
       enum: ['Playful', 'Energetic', 'Couch Potato'] 
     },
+    about: { 
+      type: String, 
+    },
     healthAndDiet: String,
     // photo: String,
     comments: [{ 

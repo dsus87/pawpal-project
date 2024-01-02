@@ -1,0 +1,35 @@
+<div id="form">
+  <h2>Pet Sign Up</h2>
+
+  <form action="/auth/pet-signup" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="{{name}}" required>
+
+    <label for="animal">Animal:</label>
+    <select id="animal" name="animal" required>
+      <option value="Dog">Dog</option>
+      <option value="Cat">Cat</option>
+    </select>
+
+    <label for="breed">Breed:</label>
+    <input type="text" id="breed" name="breed" value="{{breed}}">
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" value="{{age}}">
+
+    <label for="temperament">Temperament:</label>
+    <select id="temperament" name="temperament" required>
+      <option value="Playful">Playful</option>
+      <option value="Energetic">Energetic</option>
+      <option value="Couch Potato">Couch Potato</option>
+    </select>
+
+    <label for="about">About:</label>
+    <textarea id="about" name="about">{{about}}</textarea>
+
+    <label for="healthAndDiet">Health and Diet:</label>
+    <textarea id="healthAndDiet" name="healthAndDiet">{{healthAndDiet}}</textarea>
+
+    <button type="submit">Create Pet</button>
+  </form>
+</div>

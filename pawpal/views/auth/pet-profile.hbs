@@ -1,0 +1,34 @@
+<form action="/auth/pet/{{_id}}" method="POST">
+
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" value="{{name}}" required>
+
+  <label for="animal">Animal:</label>
+  <select id="animal" name="animal" required>
+    <option value="Dog" {{#if (eq animal "Dog")}}selected{{/if}}>Dog</option>
+    <option value="Cat" {{#if (eq animal "Cat")}}selected{{/if}}>Cat</option>
+  </select>
+
+  <label for="breed">Breed:</label>
+  <input type="text" id="breed" name="breed" value="{{breed}}">
+
+  <label for="age">Age:</label>
+  <input type="number" id="age" name="age" value="{{age}}">
+
+  <label for="temperament">Temperament:</label>
+  <select id="temperament" name="temperament" required>
+    <option value="Playful" {{#if (eq temperament "Playful")}}selected{{/if}}>Playful</option>
+    <option value="Energetic" {{#if (eq temperament "Energetic")}}selected{{/if}}>Energetic</option>
+    <option value="Couch Potato" {{#if (eq temperament "Couch Potato")}}selected{{/if}}>Couch Potato</option>
+  </select>
+
+  <label for="about">About:</label>
+  <textarea id="about" name="about">{{about}}</textarea>
+
+  <label for="healthAndDiet">Health and Diet:</label>
+  <textarea id="healthAndDiet" name="healthAndDiet">{{healthAndDiet}}</textarea>
+
+  <input type="hidden" name="_id" value="{{_id}}">
+
+  <button type="submit">Update Pet</button>
+</form>

@@ -4,6 +4,11 @@ const express = require('express');
 const router = express.Router();
 
 const User = require("../models/User.model");
+const Pet = require("../models/Pet.model");
+const Comment = require("../models/Comment.model");
+const Services = require("../models/Services.model");
+const PetSitter = require("../models/PetSitter.model");
+
 const { isLoggedIn, isLoggedOut } = require('../middlewares/route-guard');
 
 
@@ -31,7 +36,7 @@ router.post("/signup", isLoggedOut, (req, res, next) => {
 
 });
 
-/* GET Profile page */
+/* GET Private Profile page */
 router.get("/profile/:username", isLoggedIn, (req, res, next) => {
     const { username } = req.params; 
     User.findOne({ username })
@@ -118,7 +123,7 @@ router.post('/logout', isLoggedIn, (req, res, next) => {
 });
 
 
-/* POST Profile Page  */
+/* POST Private Profile Page  */
 router.post('/update-profile', isLoggedIn, (req, res, next) => {
     const { username, email, name, location } = req.body;
     const userId = req.session.currentUser._id;
@@ -132,6 +137,48 @@ router.post('/update-profile', isLoggedIn, (req, res, next) => {
         .catch(err => {
             console.log(err);
             res.render("error", { message: "An error occurred during the update." });
+        });
+});
+
+
+/* GET Public Pet Profile page */
+router.get("/pet/:_id", (req, res, next) => {
+    const { _id } = req.params;
+    Pet.findById(_id)
+        .then(pet => {
+            if (pet) {
+                res.render('public-pet-profile', { pet: pet.toObject() });
+            } else {
+                res.render("error", { message: "Pet not found." });
+            }
+        })
+        .catch(err => {
+            res.render("error", { message: "An error occurred. Please try again later." });
+        });
+});
+
+
+
+/* GET  a new Pet (private) page */
+router.get("/auth/pet-signup", isLoggedIn, (req, res, next) => {
+    res.render('auth/pet-signup', { title: "Pet Signup" });
+});
+
+/* Register a new Pet (private) page */  
+router.post("/auth/pet-signup", isLoggedIn, (req, res, next) => {
+    const { name, animal, breed, age, temperament, about, healthAndDiet } = req.body;
+    let createdPetId;
+
+    Pet.create({ name, animal, breed, age, temperament, about, healthAndDiet })
+        .then(newPet => {
+            createdPetId = newPet._id;
+            return User.findByIdAndUpdate(req.session.currentUser._id, { $push: { pets: createdPetId } });
+        })
+        .then(() => {
+            res.redirect(`/pet/${createdPetId}`);
+        })
+        .catch(err => {
+            res.render('error', { message: "An error occurred while creating the pet's profile." });
         });
 });
 
