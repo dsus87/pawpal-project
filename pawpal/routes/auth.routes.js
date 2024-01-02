@@ -220,7 +220,7 @@ router.get("/pet/:_id", (req, res, next) => {
 
 
 
-/* GET  a new Pet (private) page */
+/* GET new Pet (private) page */
 router.get("/auth/pet-signup", isLoggedIn, (req, res, next) => {
     res.render('auth/pet-signup', { title: "Pet Signup" });
 });

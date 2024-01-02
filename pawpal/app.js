@@ -23,7 +23,7 @@ require("./config/session.config")(app)
 const capitalize = require("./utils/capitalize");
 const projectName = "pawpal";
 
-app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
+// app.locals.appTitle = `${capitalize(projectName)}`;
 
  // Make currentUser available in all views
  app.use((req, res, next) => {
