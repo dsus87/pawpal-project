@@ -16,155 +16,94 @@
 
 
 {{#if username}}
-
-<form action="/update-profile" method="POST" enctype="multipart/form-data"></form>
-
-<div class="container-lg">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-md-5 text-center d-none d-md-block px-4">
-        <img class ="img-fluid" src="/{{photo}}" alt="Profile Picture" >
-      </div>
-      <div class="col-md-5 text-center text-md-start">
-        <h1>
-          <div class = "display-6 text-muted"> Welcome to your personal profile page {{username}} </div>
-        </h1>
-             <p class ="lead my-4 text-muted fw-bold"> 
-             <label for="username">Username:</label>
-             <input type="text" id="username" name="username" value="{{username}}" required>
-            </p>
-
-            <p class ="lead my-4 text-muted fw-bold"> 
-                  <label for="email">Email:</label>
-                  <input type="email" id="email" name="email" value="{{email}}" required>
-            </p>
-
-            <p class ="lead my-4 text-muted fw-bold"> 
-                  <label for="name">Name:</label>
-                  <input type="text" id="name" name="name" value="{{name}}" required>
-            </p>
-
-            <p class ="lead my-4 text-muted fw-bold"> 
-                 <label for="location">Location:</label>
-                <input type="text" id="location" name="location" value="{{location}}">
-            </p>
-
-               <p class ="lead my-4 text-muted fw-bold"> 
-                 <label for="photo">Upload Photo:</label>
-               <input type="file" id="photo" name="photo">
-            </p>
-
-      </div>
-    
+<form action="/update-profile" method="POST" enctype="multipart/form-data">
+    <div class="container-lg">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-5 text-center d-none d-md-block px-4">
+                <img class="img-fluid" src="/{{photo}}" alt="Profile Picture">
+            </div>
+            <div class="col-md-5 text-center text-md-start">
+                <h1>
+                    <div class="display-6 text-muted ">Welcome to your personal profile page {{username}}</div>
+                </h1>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Username</span>
+                    <input type="text" class="form-control" placeholder="Username" id="username" name="username" value="{{username}}" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Email</span>
+                    <input type="text" class="form-control" placeholder="Email" id="email" name="email" value="{{email}}" aria-label="email" aria-describedby="basic-addon1" required>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Name</span>
+                    <input type="text" class="form-control" placeholder="Name" id="name" name="name" value="{{name}}" aria-label="name" aria-describedby="basic-addon1" required>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Location</span>
+                    <input type="text" class="form-control" placeholder="Location" id="location" name="location" value="{{location}}" aria-label="location" aria-describedby="basic-addon1">
+                </div>
+                <p class="lead my-4 text-muted fw-bold">
+                    <label for="photo">Upload Photo:</label>
+                    <input type="file" id="photo" name="photo">
+                </p>
+            </div>
+        </div>
     </div>
-  </div>
-
-
-<div class="container-lg pt-4"></div>
-<div class="container-lg pt-4"></div>
-
-
-
-
-<section id="About Me" class=" mt-5 pb-3">
+    <section id="About Me" class="mt-5 pb-3">
     <div class="container-lg">
         <div class="text-center">
             <h2 class="mt-4">About Me</h2>
-             <label for="about">About</label>
-        <input type="text" id="about" name="about" value="{{about}}">
-            
-        </div> 
-
-
-
-
-
-<div class="container-lg pt-4"></div>
-<div class="container-lg pt-4"></div>
-
-
-<section id="Role" class=" mt-5 pb-3">
-    <div class="container-lg">
-        <div class="text-center">
-            <h2 class="mt-4">Role</h2>
-           
-        <input type="checkbox" id="Pet Sitter" name="role" value="Pet Sitter">
-        <label for="Pet Sitter">Pet Sitter</label>
-
-         <input type="checkbox" id="Pet Owner" name="role" value="Pet Owner">
-        <label for="Pet Owner">Pet Owner</label>
-            
-
-        </div> 
-
-
-
-<div class="container-lg pt-4"></div>
-<div class="container-lg pt-4"></div>
-
-<section id="Services" class=" mt-5 pb-3">
-    <div class="container-lg">
-        <div class="text-center">
-            <h2 class="mt-4">Services</h2>
-           
-       
-        <input type="checkbox" id="Pet Boarding" name="services" value="Pet Boarding">
-        <label for="Pet Boarding">Pet Boarding</label>
-
-
-        <input type="checkbox" id="Dog Walking" name="services" value="Dog Walking">
-        <label for="Dog Walking">Dog Walking</label>
- 
-      
-        <input type="checkbox" id="Pet Sitting" name="services" value="Pet Sitting">
-        <label for="Pet Sitting">Pet Sitting</label>
-            
-
-        </div> 
-
-<div class="container-lg pt-4"></div>
-<div class="container-lg pt-4"></div>
-
-
-<section id="Update" class=" mt-5 pb-3">
-    <div class="container-lg">
-        <div class="text-center">
-            <h2 class="mt-4">Update Profile</h2>
-
-    <button type="submit">Update</button>
-        
-    </form>
-
-    
-<div class="container-lg pt-4"></div>
-<div class="container-lg pt-4"></div>
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Tell us about yourself" id="floatingTextarea2" name="about" style="height: 100px">{{about}}</textarea>
+                <label for="floatingTextarea2">About Me</label>
+            </div>
+        </div>
+    </div>
+    </section>
+    <section id="Role" class="mt-5 pb-3">
+        <div class="container-lg">
+            <div class="text-center">
+                <h2 class="mt-4">Role</h2>
+                <input type="checkbox" id="Pet Sitter" name="role" value="Pet Sitter">
+                <label for="Pet Sitter">Pet Sitter</label>
+                <input type="checkbox" id="Pet Owner" name="role" value="Pet Owner">
+                <label for="Pet Owner">Pet Owner</label>
+            </div>
+        </div>
+    </section>
+    <section id="Services" class="mt-5 pb-3">
+        <div class="container-lg">
+            <div class="text-center">
+                <h2 class="mt-4">Services</h2>
+                <input type="checkbox" id="Pet Boarding" name="services" value="Pet Boarding">
+                <label for="Pet Boarding">Pet Boarding</label>
+                <input type="checkbox" id="Dog Walking" name="services" value="Dog Walking">
+                <label for="Dog Walking">Dog Walking</label>
+                <input type="checkbox" id="Pet Sitting" name="services" value="Pet Sitting">
+                <label for="Pet Sitting">Pet Sitting</label>
+            </div>
+        </div>
+    </section>
+    <section id="Update" class="mt-5 pb-3">
+        <div class="container-lg">
+            <div class="text-center">
+                <h2 class="mt-4">Update Profile</h2>
+                <button type="submit">Update</button>
+            </div>
+        </div>
+    </section>
+</form>
 
 {{else}}
+
+
+
         <p>Still not logged in, sorry!</p>
     {{/if}}
 
 
-    {{!-- <h1></h1> --}}
-        {{!-- <img src="/{{photo}}" alt="Profile Picture" style="width: 300px; height: 400px;"> --}}
-    
-
-     
-
-        
 
        
-
-      
-
-       
-
-         
-
-   
-
- 
-
-    
-
     <h2>{{username}}'s Pets</h2>
          <button type="button" onclick="window.location.href='/auth/pet-signup'">Register a Pet</button>
     <ul>
