@@ -34,12 +34,17 @@ const userSchema = new Schema(
     photo:{ 
       type: String,
     },
-    roles: [
+    role: [
       {
         type: String,
-        enum: ['PetSitter', 'PetOwner'],
+        enum: ['Pet Sitter', 'Pet Owner'],
       },
     ],
+
+    about: {
+      type: String,
+    },
+
     availability: { 
       type: String, 
       enum: ['Available', 'Unavailable'] 

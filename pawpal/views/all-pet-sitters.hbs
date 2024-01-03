@@ -1,2 +1,12 @@
-<h1>{{appTitle}} 🚀</h1>
 <p>All Sitters</p>
+
+{{#each petSitters}}
+  <div>
+    <img src="/{{photo}}" alt="Profile Picture" style="width: 300px; height: 400px;">
+    <h2>{{this.name}}</h2>
+    <p>Location: {{this.location}}</p>
+    <p>Availability: {{this.availability}}</p>
+    <p>Email: {{this.email}}</p>
+    <p>About: {{this.about}}</p>
+  </div>
+{{/each}}

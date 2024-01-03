@@ -77,7 +77,7 @@ router.get("/auth/profile/:username", isLoggedIn, (req, res, next) => {
 
 /* POST Private Profile Page  */
 router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, next) => {
-    const { username, email, password, name, location, role, availability, services, pets, reviews } = req.body;
+    const { username, email, password, name, location, role, about,  availability, services, pets, reviews } = req.body;
     const userId = req.session.currentUser._id;
 
     User.findOne({ username: username, _id: { $ne: userId } })
@@ -88,7 +88,7 @@ router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, ne
                     errorMessage: "Username already taken."
                 });
             } else {
-                const updateData = { username, email, password, name, location, role, availability, services, pets, reviews };
+                const updateData = { username, email, password, name, location, role, about, availability, services, pets, reviews };
                 
                 if (req.file) {
                     updateData.photo = req.file.path;
@@ -256,5 +256,15 @@ router.get("/auth/pet-profile/:_id", isLoggedIn, (req, res, next) => {
 });
 
 
+ 
+/* GET Public Pet Sitter's Page */
+router.get("/all-sitters", async (req, res, next) => {
+    try {
+        const petSitters = await User.find({ role: 'Pet Sitter' });
+        res.render('all-pet-sitters', { title: "All Pet Sitters Search", petSitters });
+    } catch (error) {
+        next(error);
+    }
+});
 
 module.exports = router;
