@@ -6,7 +6,7 @@ const { Schema, model } = require("mongoose");
 const serviceSchema = new Schema({
     servicesOffered: { 
       type: String, 
-      enum: ['Walking', 'Sitting', 'Cleaning'] 
+      enum: ['Boarding', 'Sitting', 'Walking'] 
     },
     petSitter: { 
       type: Schema.Types.ObjectId, 

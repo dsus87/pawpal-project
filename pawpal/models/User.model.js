@@ -50,8 +50,8 @@ const userSchema = new Schema(
       enum: ['Available', 'Unavailable'] 
     },
     services: [{ 
-      type: Schema.Types.ObjectId, 
-      ref: 'Service' 
+      type: String, 
+      enum: ['Pet Boarding', 'Dog Walking', 'Pet Sitting'],
     }],
     pets: [{ 
       type: Schema.Types.ObjectId, 

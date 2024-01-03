@@ -108,6 +108,9 @@ router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, ne
 });
 
 
+
+
+
 /* GET Public Profile page */
 router.get("/profile/:username",upload.single('photo'), (req, res, next) => {
     const { username } = req.params;
