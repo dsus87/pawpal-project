@@ -267,7 +267,7 @@ router.get("/auth/pet-profile/:_id", isLoggedIn, (req, res, next) => {
 
 
  
-/* GET Public Pet Sitter's Page */
+/* GET Search Page for Pet Sitter*/
 router.get("/all-sitters", async (req, res, next) => {
     try {
         const petSitters = await User.find({ role: 'Pet Sitter' });
@@ -284,7 +284,6 @@ router.post('/profile/:username/comment', isLoggedIn, (req, res, next) => {
     const { content, rating } = req.body;
     let profileUser;
 
-    // Find the profile user
     User.findOne({ username })
         .then(user => {
             if (!user) {
@@ -292,10 +291,9 @@ router.post('/profile/:username/comment', isLoggedIn, (req, res, next) => {
             }
             profileUser = user;
 
-            // Create a new comment
             const newComment = new Comment({
-                author: req.session.currentUser._id, // assuming the current logged-in user is the author
-                relatedUser: user._id, // assuming relatedUser is the field to link the comment to the user's profile
+                author: req.session.currentUser._id, 
+                relatedUser: user._id,
                 content,
                 rating
             });
@@ -303,7 +301,7 @@ router.post('/profile/:username/comment', isLoggedIn, (req, res, next) => {
             return newComment.save();
         })
         .then(() => {
-            res.redirect(`/profile/${username}`); // Redirect back to the profile page
+            res.redirect(`/profile/${username}`); 
         })
         .catch(err => {
             console.error(err);
