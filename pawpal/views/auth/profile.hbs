@@ -16,17 +16,33 @@
 
 
 {{#if username}}
+
+
+<div class="container-lg">
+    <div class="row justify-content-center">
+        <div class="col-md-8 pb-5">
+            <h1 class="d-flex justify-content-center align-items-center">
+                <div class="display-6 text-muted">Welcome to your personal profile page {{username}}</div>
+            </h1>
+        </div>
+    </div>
+</div>
+
+
 <form action="/update-profile" method="POST" enctype="multipart/form-data">
     <div class="container-lg">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-5 text-center d-none d-md-block px-4">
                 <img class="img-fluid" src="/{{photo}}" alt="Profile Picture">
+                 <p class="text-muted pt-3 justify-content-start">
+                    <label for="photo">Upload Photo:</label>
+                    <input type="file" id="photo" name="photo">
+                </p>
             </div>
             <div class="col-md-5 text-center text-md-start">
-                <h1>
-                    <div class="display-6 text-muted ">Welcome to your personal profile page {{username}}</div>
-                </h1>
+                   <h2 class="mt-4 fs-8 pb-3">Basic Info</h2>
                 <div class="input-group mb-3">
+                
                     <span class="input-group-text" id="basic-addon1">Username</span>
                     <input type="text" class="form-control" placeholder="Username" id="username" name="username" value="{{username}}" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
@@ -42,28 +58,12 @@
                     <span class="input-group-text" id="basic-addon1">Location</span>
                     <input type="text" class="form-control" placeholder="Location" id="location" name="location" value="{{location}}" aria-label="location" aria-describedby="basic-addon1">
                 </div>
-                <p class="lead my-4 text-muted fw-bold">
-                    <label for="photo">Upload Photo:</label>
-                    <input type="file" id="photo" name="photo">
-                </p>
-            </div>
-        </div>
-    </div>
-    <section id="About Me" class="mt-5 pb-3">
-    <div class="container-lg">
-        <div class="text-center">
-            <h2 class="mt-4">About Me</h2>
-            <div class="form-floating">
-                <textarea class="form-control" placeholder="Tell us about yourself" id="floatingTextarea2" name="about" style="height: 100px">{{about}}</textarea>
-                <label for="floatingTextarea2">About Me</label>
-            </div>
-        </div>
-    </div>
+               
     </section>
-    <section id="Role" class="mt-5 pb-3">
+    <section id="Role" class="mt-5 pb-3 ">
         <div class="container-lg">
-            <div class="text-center">
-                <h2 class="mt-4">Role</h2>
+            <div class="text-start">
+                <h2 class="mt-4 fs-8 pb-3">Role</h2>
                 <input type="checkbox" id="Pet Sitter" name="role" value="Pet Sitter">
                 <label for="Pet Sitter">Pet Sitter</label>
                 <input type="checkbox" id="Pet Owner" name="role" value="Pet Owner">
@@ -73,8 +73,8 @@
     </section>
     <section id="Services" class="mt-5 pb-3">
         <div class="container-lg">
-            <div class="text-center">
-                <h2 class="mt-4">Services</h2>
+            <div class="text-start">
+                <h2 class="mt-4 fs-8 pb-3">Services</h2>
                 <input type="checkbox" id="Pet Boarding" name="services" value="Pet Boarding">
                 <label for="Pet Boarding">Pet Boarding</label>
                 <input type="checkbox" id="Dog Walking" name="services" value="Dog Walking">
@@ -84,6 +84,32 @@
             </div>
         </div>
     </section>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+
+ <section id="AboutMe" class="mt-5 pb-3">
+    <div class="container-lg">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="text-center">
+                    <h2 class="mt-4">About Me</h2>
+                </div>
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Tell us about yourself" id="floatingTextarea2" name="about" style="height: 100px">{{about}}</textarea>
+                    <label for="floatingTextarea2">About Me</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
     <section id="Update" class="mt-5 pb-3">
         <div class="container-lg">
             <div class="text-center">
@@ -100,6 +126,25 @@
 
         <p>Still not logged in, sorry!</p>
     {{/if}}
+
+
+
+<h2>{{username}}'s Comments</h2>
+<ul>
+    {{#each comments}}
+    <li>
+        <strong>Author:</strong> {{this.author.username}}<br>
+        <strong>Comment:</strong> {{this.content}}<br>
+        <strong>Rating:</strong> {{this.rating}}/5<br>
+
+        {{#if this.parentComment}}
+            <strong>Reply to Comment ID:</strong> {{this.parentComment}}<br>
+        {{/if}}
+      
+    </li>
+    {{/each}}
+</ul>
+
 
 
 

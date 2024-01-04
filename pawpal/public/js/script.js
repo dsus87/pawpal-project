@@ -2,3 +2,4 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("pawpal JS imported successfully!");
 });
+

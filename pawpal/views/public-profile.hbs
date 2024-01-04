@@ -3,11 +3,9 @@
 {{/if}}
 
 
+<h1>Welcome to {{username}}'s profile page!</h1>
+
 {{#if username}}
-
-
-    <h1>Welcome to {{username}}'s profile page!</h1>
-
     {{#if photo}}
         <img src="/{{photo}}" alt="Profile Picture" style="width: 300px; height: 400px;">
     {{else}}
@@ -20,6 +18,49 @@
         <strong>Name:</strong> {{name}}<br>
         <strong>Location:</strong> {{location}}<br>
     </div>
+
+
+
+<h2>User Reviews</h2>
+{{#if user.reviews}}
+    <ul>
+        {{#each user.reviews}}
+        <li>
+            <strong>Comment by:</strong> {{this.author.username}}<br>
+            <strong>Content:</strong> {{this.content}}<br>
+            <strong>Rating:</strong> {{this.rating}}/5<br>
+        </li>
+        {{/each}}
+    </ul>
+{{else}}
+    <p>No comments available.</p>
+{{/if}}
+
+    <!-- Comment Form -->
+    <div>
+        <h2>Leave a Comment</h2>
+        <form action="/profile/{{username}}/comment" method="POST">
+            <div>
+                <label for="content">Comment:</label><br>
+                <textarea name="content" id="content" rows="4" cols="50" required></textarea>
+            </div>
+            <div>
+                <label for="rating">Rating:</label><br>
+                <select name="rating" id="rating" required>
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit">Submit Comment</button>
+            </div>
+        </form>
+    </div>
+
+
 {{else}}
     <p>Username not provided.</p>
 {{/if}}

@@ -116,6 +116,13 @@ router.get("/profile/:username",upload.single('photo'), (req, res, next) => {
     const { username } = req.params;
     console.log("Username:", username);  
     User.findOne({ username })
+     .populate({
+        path: 'reviews', // Populate the reviews (comments)
+        populate: { 
+            path: 'author', 
+            select: 'username' 
+        }
+    })
         .then(user => {
             console.log("Found user:", user); 
             if (user) {
@@ -269,5 +276,41 @@ router.get("/all-sitters", async (req, res, next) => {
         next(error);
     }
 });
+
+
+/* POST Comment on Public Profile */
+router.post('/profile/:username/comment', isLoggedIn, (req, res, next) => {
+    const { username } = req.params;
+    const { content, rating } = req.body;
+    let profileUser;
+
+    // Find the profile user
+    User.findOne({ username })
+        .then(user => {
+            if (!user) {
+                throw new Error('User not found.');
+            }
+            profileUser = user;
+
+            // Create a new comment
+            const newComment = new Comment({
+                author: req.session.currentUser._id, // assuming the current logged-in user is the author
+                relatedUser: user._id, // assuming relatedUser is the field to link the comment to the user's profile
+                content,
+                rating
+            });
+
+            return newComment.save();
+        })
+        .then(() => {
+            res.redirect(`/profile/${username}`); // Redirect back to the profile page
+        })
+        .catch(err => {
+            console.error(err);
+            res.render("error", { message: "An error occurred while posting the comment." });
+        });
+});
+
+
 
 module.exports = router;
