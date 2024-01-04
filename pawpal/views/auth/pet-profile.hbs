@@ -2,40 +2,56 @@
 
 <form action="/auth/pet-profile" method="POST" enctype="multipart/form-data">
 
+  <p>
   <label for="name">Name:</label>
-  <input type="text" id="name" name="name" value="{{name}}" required>
+  <input type="text" id="name" name="name" value="{{pet.name}}" required>
+  </p>
 
+  <p>
   <label for="animal">Animal:</label>
   <select id="animal" name="animal" required>
-    <option value="Dog" {{#if (eq animal "Dog")}}selected{{/if}}>Dog</option>
-    <option value="Cat" {{#if (eq animal "Cat")}}selected{{/if}}>Cat</option>
+    <option value="Dog" {{#if (eq pet.animal "Dog")}}selected{{/if}}>Dog</option>
+    <option value="Cat" {{#if (eq pet.animal "Cat")}}selected{{/if}}>Cat</option>
   </select>
+  </p>
 
+  <p>
   <label for="breed">Breed:</label>
-  <input type="text" id="breed" name="breed" value="{{breed}}">
+  <input type="text" id="breed" name="breed" value="{{pet.breed}}">
+  </p>
 
+  <p>
   <label for="age">Age:</label>
-  <input type="number" id="age" name="age" value="{{age}}">
+  <input type="number" id="age" name="age" value="{{pet.age}}">
+  </p>
 
+  <p>
   <label for="temperament">Temperament:</label>
   <select id="temperament" name="temperament" required>
-    <option value="Playful" {{#if (eq temperament "Playful")}}selected{{/if}}>Playful</option>
-    <option value="Energetic" {{#if (eq temperament "Energetic")}}selected{{/if}}>Energetic</option>
-    <option value="Couch Potato" {{#if (eq temperament "Couch Potato")}}selected{{/if}}>Couch Potato</option>
+    <option value="Playful" {{#if (eq pet.temperament "Playful")}}selected{{/if}}>Playful</option>
+    <option value="Energetic" {{#if (eq pet.temperament "Energetic")}}selected{{/if}}>Energetic</option>
+    <option value="Couch Potato" {{#if (eq pet.temperament "Couch Potato")}}selected{{/if}}>Couch Potato</option>
   </select>
+  </p>
 
+  <p>
   <label for="about">About:</label>
-  <textarea id="about" name="about">{{about}}</textarea>
+  <textarea id="about" name="about">{{pet.about}}</textarea>
+  </p>
 
-    <label for="photo">Upload Photo:</label>
-    <input type="file" id="photo" name="photo">
+  <p>
+  <label for="photo">Upload Photo:</label>
+  <input type="file" id="photo" name="photo" value="{{pet.photo}}">
+  </p>
 
-
-
+  <p>
   <label for="healthAndDiet">Health and Diet:</label>
-  <textarea id="healthAndDiet" name="healthAndDiet">{{healthAndDiet}}</textarea>
+  <textarea id="healthAndDiet" name="healthAndDiet">{{pet.healthAndDiet}}</textarea>
+  </p>
 
-  <input type="hidden" name="_id" value="{{_id}}">
+  <input type="hidden" id="_id" name="_id" value="{{pet._id}}"/>
 
+  <p>
   <button type="submit">Update Pet</button>
+  </p>
 </form>

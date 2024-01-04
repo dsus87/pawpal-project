@@ -263,9 +263,42 @@ router.post("/auth/pet-signup", isLoggedIn, upload.single('photo'), (req, res, n
 
 /* GET Pet (private) page */
 router.get("/auth/pet-profile/:_id", isLoggedIn, (req, res, next) => {
-    res.render('auth/pet-signup', { title: "Pet Profile" });
+
+    const { _id } = req.params;
+    Pet.findById(_id)
+        .then(pet => {
+            if (pet) {
+                res.render('auth/pet-profile', { pet: pet.toObject() });
+            } else {
+                res.render("error", { message: "Pet not found." });
+            }
+        })
+        .catch(err => {
+            res.render("error", { message: "An error occurred. Please try again later." });
+        });
+
 });
 
+
+/* Edit a Pet (private) page */  
+router.post("/auth/pet-profile", isLoggedIn, upload.single('photo'), (req, res, next) => {
+    console.log(req.body)
+    const { name, animal, breed, age, temperament, about, healthAndDiet, _id } = req.body;
+
+    const petData = { name, animal, breed, age, temperament, about, healthAndDiet };
+
+    if (req.file) {
+        petData.photo = req.file.path;
+    }
+
+    Pet.findByIdAndUpdate(_id, petData )
+        .then(() => {
+            res.redirect(`/pet/${(_id)}`);
+        })
+        .catch(err => {
+            res.render('error', { message: "An error occurred while editing the pet's profile." });
+        });
+});
 
  
 /* GET Search Page for Pet Sitter*/
