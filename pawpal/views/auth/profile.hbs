@@ -22,7 +22,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8 pb-5">
             <h1 class="d-flex justify-content-center align-items-center">
-                <div class="display-6 text-muted">Welcome to your personal profile page {{username}}</div>
+                <div class="display-6 text-muted">Welcome {{name}}</div>
             </h1>
         </div>
     </div>
@@ -34,8 +34,7 @@
             <div class="col-md-5 text-center d-none d-md-block px-4">
                 <img class="img-fluid" src="/{{photo}}" alt="Profile Picture">
                 <p class="text-muted pt-3 justify-content-start">
-                    <label for="photo">Upload Photo:</label>
-                    <input type="file" id="photo" name="photo">
+                   
                 </p>
             </div>
             <div class="col-md-5 text-center text-md-start">
@@ -64,9 +63,9 @@
             <div class="text-start">
                 <h2 class="mt-4 fs-6 pb-3"> Select your roles(you may have multiple roles).</h2>
                 <input type="checkbox" id="Pet Sitter" name="role" value="Pet Sitter">
-                <label for="Pet Sitter">Pet Sitter</label>
+                <label for="Pet Sitter">Pet Sitter</label> <br>
                 <input type="checkbox" id="Pet Owner" name="role" value="Pet Owner">
-                <label for="Pet Owner">Pet Owner</label>
+                <label for="Pet Owner">Pet Owner</label> <br>
             </div>
         </div>
           
@@ -74,11 +73,20 @@
                         <div class="text-start">
                             <h2 class="mt-4 fs-6 pb-3">Which services do you offer?</h2>
                             <input type="checkbox" id="Pet Boarding" name="services" value="Pet Boarding">
-                            <label for="Pet Boarding">Pet Boarding</label>
+                            <label for="Pet Boarding">Pet Boarding</label> <br>
                             <input type="checkbox" id="Dog Walking" name="services" value="Dog Walking">
-                            <label for="Dog Walking">Dog Walking</label>
+                            <label for="Dog Walking">Dog Walking</label> <br>
                             <input type="checkbox" id="Pet Sitting" name="services" value="Pet Sitting">
-                            <label for="Pet Sitting">Pet Sitting</label>
+                            <label for="Pet Sitting">Pet Sitting</label ><br>
+                        </div>
+                    </div>
+
+                  
+
+                     <div class="input-group mb-3">
+                        <div class="text-start">
+                       <h2 class="mt-4 fs-6 pb-3">Photo</h2>
+                         <input type="file" id="photo" name="photo">                        >
                         </div>
                     </div>
             
@@ -97,7 +105,7 @@
                     </div>
                     <div class="form-floating">
                         <textarea class="form-control" placeholder="Tell us about yourself" id="floatingTextarea2" name="about" style="height: 100px">{{about}}</textarea>
-                        <label for="floatingTextarea2">About Me</label>
+                        
                     </div>
                 </div>
             </div>
@@ -133,7 +141,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="text-center">
-                     <h2>{{username}}'s Pets</h2>
+                     <h2>{{name}}'s Pets</h2>
                               <button type="button" onclick="window.location.href='/auth/pet-signup'">Register a Pet</button>
 
                 </div>

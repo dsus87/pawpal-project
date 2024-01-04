@@ -17,12 +17,12 @@
         <h1>
           {{!-- <div class = "display-4">Welcome to Pawpal</div> --}}
           <div class = "display-6 "> About </div>
-        </h1>
+              </h1>
              <p class ="lead my-4">
               <strong>Name:</strong> {{name}}<br>
              <strong>Email:</strong> {{email}}<br>
            <strong>Location:</strong> {{location}}<br>
-           <strong>About:</strong> {{about}}<br>
+          
         </p>
       </div>
     
@@ -30,32 +30,64 @@
   </div>
 
 
+ <section id="AboutMe" class="mt-5 pb-3">
+        <div class="container-lg">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="text-center">
+                        <h2 class="mt-4">About Me</h2>
+                    </div>
+                     <p class ="lead my-4">
+                    {{about}}
+                    </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 
 
+ <section id="Reviews" class="mt-5 pb-3">
+        <div class="container-lg">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="text-center">
+                        <h2>User Reviews</h2>
+                    </div>
+                    {{#each reviews}}
+                     <p class ="lead my-4">
+                        <strong>Comment by:</strong> {{this.author.username}}<br>
+                        <strong>Content:</strong> {{this.content}}<br>
+                        <strong>Rating:</strong> {{this.rating}}/5<br>
+                        <br>
+                     {{/each}}
+                    
+                        {{#if reviews}}
+                        
+                        
+                        {{else}}
+                            <p>No comments available.</p>
+                        {{/if}}
+                    </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 
-<h2>User Reviews</h2>
-{{#if reviews}}
-  
-        {{#each reviews}}
-            <strong>Comment by:</strong> {{this.author.username}}<br>
-            <strong>Content:</strong> {{this.content}}<br>
-            <strong>Rating:</strong> {{this.rating}}/5<br>
-            <br>
-        {{/each}}
+ <section id="AboutMe" class="mt-5 pb-3">
+        <div class="container-lg">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="text-center">
+                         <h2>Leave a Comment</h2>
+                    </div>
+                   <div>
    
-{{else}}
-    <p>No comments available.</p>
-{{/if}}
-
-
-
-    <!-- Comment Form -->
-    <div>
-        <h2>Leave a Comment</h2>
         <form action="/profile/{{username}}/comment" method="POST">
             <div>
                 <label for="content">Comment:</label><br>
@@ -76,6 +108,18 @@
             </div>
         </form>
     </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Comment Form -->
+    
 
 
 

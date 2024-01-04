@@ -13,7 +13,6 @@ h1 {
 }
 
 
-
 .square-image-container {
   width: 100%;
   padding-top: 70%; 
@@ -30,4 +29,9 @@ h1 {
   transform: translateX(-50%);
   object-fit: cover;
   object-position: top; 
+}
+
+.service-image {
+  max-width: 25%; 
+  height: auto;
 }
