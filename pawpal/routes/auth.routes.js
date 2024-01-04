@@ -117,9 +117,10 @@ router.get("/profile/:username",upload.single('photo'), (req, res, next) => {
     console.log("Username:", username);  
     User.findOne({ username })
      .populate({
-        path: 'reviews', // Populate the reviews (comments)
+        path: 'reviews', 
         populate: { 
             path: 'author', 
+            model: 'User',
             select: 'username' 
         }
     })
@@ -292,23 +293,28 @@ router.post('/profile/:username/comment', isLoggedIn, (req, res, next) => {
             profileUser = user;
 
             const newComment = new Comment({
-                author: req.session.currentUser._id, 
-                relatedUser: user._id,
+                author: req.session.currentUser._id, // Set the author of the comment to the current logged-in user
+                relatedPet: user._id, 
                 content,
                 rating
             });
 
+            // Save the new comment to the database
             return newComment.save();
         })
+        .then((savedComment) => {
+            return User.findByIdAndUpdate(profileUser._id, 
+                { $push: { reviews: savedComment._id } },
+            );
+        })
         .then(() => {
-            res.redirect(`/profile/${username}`); 
+            res.redirect(`/profile/${username}`);
         })
         .catch(err => {
             console.error(err);
             res.render("error", { message: "An error occurred while posting the comment." });
         });
 });
-
 
 
 module.exports = router;

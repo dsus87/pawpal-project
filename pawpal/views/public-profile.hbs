@@ -22,19 +22,20 @@
 
 
 <h2>User Reviews</h2>
-{{#if user.reviews}}
-    <ul>
-        {{#each user.reviews}}
-        <li>
+{{#if reviews}}
+  
+        {{#each reviews}}
             <strong>Comment by:</strong> {{this.author.username}}<br>
             <strong>Content:</strong> {{this.content}}<br>
             <strong>Rating:</strong> {{this.rating}}/5<br>
-        </li>
+            <br>
         {{/each}}
-    </ul>
+   
 {{else}}
     <p>No comments available.</p>
 {{/if}}
+
+
 
     <!-- Comment Form -->
     <div>
