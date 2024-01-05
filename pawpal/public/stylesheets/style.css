@@ -16,7 +16,7 @@ h1 {
   width: 100%;
   padding-top: 70%; 
   position: relative;
-  overflow: hidden;
+
 }
 
 .square-image-container img {
@@ -30,7 +30,3 @@ h1 {
   object-position: top; 
 }
 
-.service-image {
-  max-width: 25%; 
-  height: auto;
-}
