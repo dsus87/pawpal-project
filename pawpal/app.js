@@ -12,6 +12,8 @@ const express = require("express");
 // Handles the handlebars
 // https://www.npmjs.com/package/hbs
 const hbs = require("hbs");
+hbs.registerHelper('eq', (a, b) => a === b);
+
 
 const app = express();
 

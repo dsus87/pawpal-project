@@ -8,7 +8,7 @@ module.exports = app => {
       // use session
       app.use(
         session({
-          secret: process.env.SESS_SECRET,
+          secret: process.env.SESS_SECRET || "your-default-secret-key",
           resave: true,
           secure: false,
           saveUninitialized: false,

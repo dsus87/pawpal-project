@@ -1,1 +1,17 @@
-<h1>Public Pet Profile Page</h1>
+<h1>Public Pet Profile</h1>
+
+{{#if pet}}
+  <h2>{{pet.name}}</h2>
+  <p><strong>Animal:</strong> {{pet.animal}}</p>
+  <p><strong>Breed:</strong> {{pet.breed}}</p>
+  <p><strong>Age:</strong> {{pet.age}}</p>
+  <!-- Add other pet details as needed -->
+
+  {{#if pet.photo}}
+    <img src="/{{pet.photo}}" alt="{{pet.name}}" style="width: 200px; height: 200px;">
+  {{else}}
+    <p>No photo available.</p>
+  {{/if}}
+{{else}}
+  <p>Pet not found.</p>
+{{/if}}
