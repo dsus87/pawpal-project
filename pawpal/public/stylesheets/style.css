@@ -1,6 +1,7 @@
 body {
   padding: 25px;
-  font: 10px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 10px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 a {
@@ -9,7 +10,12 @@ a {
 
 h1 {
   color: 15px;
+  font-family: 'Open Sans', sans-serif;
   
+}
+
+.p {
+  font-family: 'Open Sans', sans-serif;font-family: 'Open Sans', sans-serif;
 }
 
 .square-image-container {

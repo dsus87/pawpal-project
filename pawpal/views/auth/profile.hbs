@@ -15,138 +15,147 @@
 {{else}}
 
 
-{{#if username}}
 
 
-<div class="container-lg">
-    <div class="row justify-content-center">
-        <div class="col-md-8 pb-5">
-            <h1 class="d-flex justify-content-center align-items-center">
-                <div class="display-6 text-muted">Welcome {{name}}</div>
-            </h1>
+<div class="container">
+    <form action="/update-profile" method="POST" enctype="multipart/form-data">
+        <!-- Row 1 -->
+        <div class="row justify-content-center">
+            <div class="col-12-md-8 pb-5">
+                <div class="display-6 text-muted">Welcome {{ name }}</div>
+            </div>
+        </div>
+        <!-- Row 2 -->
+        <div class="row">
+            <div class="col-auto">
+                <h5>Profile image</h5>
+                <img class="img-fluid rounded" style="max-width: 350px;" src="/{{ photo }}" alt="Profile Picture"> <!-- Column 1, Row 2 -->
+            </div>
+            <div class="col-auto"> <!-- Column 2, Row 2 -->
+                <div class="input-group mb-3">
+                    <div class="text-start">
+                        <h5 class="mt-4 fs-6 pb-3">Photo</h5>
+                        <p>Upload your photo in PNG or JPG format.</p>
+                        <input type="file" id="photo" name="photo">
+                    </div>
+                </div>
+            </div>   
+        </div>
+        <!-- Row 3 -->
+        <div class="row">
+            <div class="col mt-4">
+                <h5>Full name</h5>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control bg-light" placeholder="Name" id="name" name="name" value="{{ name }}" aria-label="Name" aria-describedby="basic-addon1" required>
+                </div>
+            </div>
+        </div>
+        <!-- Row 4 -->
+        <div class="row">
+            <div class="col">
+                <h5>Username</h5>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control bg-light" placeholder="Username" id="username" name="username" value="{{ username }}" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>
+        </div>
+        <!-- Row 5 -->
+        <div class="row">
+            <div class="col">
+                <h5>Email</h5>
+                <div class="input-group mb-3 ">
+                    <input type="text" class="form-control bg-light" placeholder="Email" id="email" name="email" value="{{ email }}" aria-label="Email" aria-describedby="basic-addon1" required>
+                </div>
+            </div>
+        </div>
+        <!-- Row 6 -->
+        <div class="row">
+            <div class="col">
+                <h5>Location</h5>
+                <div class="input-group mb-3 bg-light ">
+                    <input type="text" class="form-control bg-light" placeholder="Location" id="location" name="location" value="{{ location }}" aria-label="Location" aria-describedby="basic-addon1">
+                </div>
+            </div>
+        </div>
+        <!-- Row 7 -->
+        <div class="row">
+            <div class="col">
+                <div class="text-start mb-3">
+                    <h5 class="mb-3">Which services do you offer?</h5>
+                    <input type="checkbox" id="Pet Boarding" name="services" value="Pet Boarding">
+                    <label for="Pet Boarding">Pet Boarding</label>
+                    <input type="checkbox" id="Dog Walking" name="services" value="Dog Walking">
+                    <label for="Dog Walking">Dog Walking</label>
+                    <input type="checkbox" id="Pet Sitting" name="services" value="Pet Sitting">
+                    <label for="Pet Sitting">Pet Sitting</label>
+                </div>
+            </div>
+        </div>
+        <!-- Row 8 -->
+        <div class="row">
+            <div class="col">    
+                <div class="text-start mb-3">
+                    <h5 class="mb-3">Select your role</h5>
+                    <input type="checkbox" id="Pet Sitter" name="role" value="Pet Sitter">
+                    <label for="Pet Sitter">Pet Sitter</label>
+                    <input type="checkbox" id="Pet Owner" name="role" value="Pet Owner">
+                    <label for="Pet Owner">Pet Owner</label>
+                </div>
+            </div>
+        </div>
+        <!-- Row 9 -->
+        <div class="row">
+            <div class="col">
+                <div class="form-floating mt-">
+                    <h5>About me</h5>
+                    <textarea class="form-control bg-light" placeholder="Tell us about yourself" id="floatingTextarea2" name="about" style="height: 100px">{{ about }}</textarea>
+                
+                </div>
+            </div>
+        </div>
+        <!-- Row 10 -->
+       <div class="row">
+    <div class="col">
+        <div class="mt-2 d-flex justify-content-end"> 
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </div>
 </div>
-
-<form action="/update-profile" method="POST" enctype="multipart/form-data">
-    <div class="container-lg">
-        <div class="row justify-content-center">
-            <div class="col-md-5 text-center d-none d-md-block px-4">
-                <img class="img-fluid" src="/{{photo}}" alt="Profile Picture">
-                <p class="text-muted pt-3 justify-content-start">
-                   
-                </p>
-            </div>
-            <div class="col-md-5 text-center text-md-start">
-                <h2 class="mt-4 fs-7 pb-3">Basic Information</h2>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Username</span>
-                    <input type="text" class="form-control" placeholder="Username" id="username" name="username" value="{{username}}" aria-label="Username" aria-describedby="basic-addon1">
-                </div>
+    </form>
+</div>
 
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Email</span>
-                    <input type="text" class="form-control" placeholder="Email" id="email" name="email" value="{{email}}" aria-label="Email" aria-describedby="basic-addon1" required>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Name</span>
-                    <input type="text" class="form-control" placeholder="Name" id="name" name="name" value="{{name}}" aria-label="Name" aria-describedby="basic-addon1" required>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Location</span>
-                    <input type="text" class="form-control" placeholder="Location" id="location" name="location" value="{{location}}" aria-label="Location" aria-describedby="basic-addon1">
-                </div>
 
-                 
-           <div class="input-group mb-3">
-            <div class="text-start">
-                <h2 class="mt-4 fs-6 pb-3"> Select your roles(you may have multiple roles).</h2>
-                <input type="checkbox" id="Pet Sitter" name="role" value="Pet Sitter">
-                <label for="Pet Sitter">Pet Sitter</label> <br>
-                <input type="checkbox" id="Pet Owner" name="role" value="Pet Owner">
-                <label for="Pet Owner">Pet Owner</label> <br>
-            </div>
-        </div>
-          
-                  <div class="input-group mb-3">
-                        <div class="text-start">
-                            <h2 class="mt-4 fs-6 pb-3">Which services do you offer?</h2>
-                            <input type="checkbox" id="Pet Boarding" name="services" value="Pet Boarding">
-                            <label for="Pet Boarding">Pet Boarding</label> <br>
-                            <input type="checkbox" id="Dog Walking" name="services" value="Dog Walking">
-                            <label for="Dog Walking">Dog Walking</label> <br>
-                            <input type="checkbox" id="Pet Sitting" name="services" value="Pet Sitting">
-                            <label for="Pet Sitting">Pet Sitting</label ><br>
-                        </div>
-                    </div>
 
-                  
+{{#if username}}
 
-                     <div class="input-group mb-3">
-                        <div class="text-start">
-                       <h2 class="mt-4 fs-6 pb-3">Photo</h2>
-                         <input type="file" id="photo" name="photo">                        >
-                        </div>
-                    </div>
-            
-            </div>
-        </div>
-    </div>
-
-   
-
-    <section id="AboutMe" class="mt-5 pb-3">
-        <div class="container-lg">
-            <div class="row justify-content-center">
-                <div class="col-md-10">
-                    <div class="text-center">
-                        <h2 class="mt-4">About Me</h2>
-                    </div>
-                    <div class="form-floating">
-                        <textarea class="form-control" placeholder="Tell us about yourself" id="floatingTextarea2" name="about" style="height: 100px">{{about}}</textarea>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="Update" class="mt-5 pb-3">
-        <div class="container-lg">
-            <div class="text-center">
-               
-                <button type="submit">Update</button>
-            </div>
-        </div>
-    </section>
-
-</form>
 
 
 {{else}}
 <p>Still not logged in, sorry!</p>
 
+
 {{/if}}
 
- <section id="MyPets" class="mt-5 pb-3">
-    <div class="container-lg">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="text-center">
-                     <h2>{{name}}'s Pets</h2>
-                              <button type="button" onclick="window.location.href='/auth/pet-signup'">Register a Pet</button>
+
+ <div class="row justify-content-center">
+            <div class="col-12-md-8 pb-5">
+                <div class="display-6 text-muted">Your pets</div>
+            </div>
+        </div>
+
+
+
 
                 </div>
-                         <ul>
+             
                             {{#each pets}}
-                                <li>
-                                    <strong>Name:</strong> {{this.name}}<br>
-                                    <strong>Animal:</strong> {{this.animal}}<br>
-                                    <strong>Breed:</strong> {{this.breed}}<br>
+                             
+                                    <h5>{{this.name}}</h5>
+                      
                                     {{#if this.photo}}
                                     <p>
-                                        <img src="/{{this.photo}}" alt="{{this.name}}" style="width: 100px; height: 100px;">
+                                        <img src="/{{this.photo}}" alt="{{this.name}}" class="img-fluid rounded" style="max-width: 200px;">
                                     </p>
                                     {{else}}
                                         <p>No photo available.</p>
@@ -156,11 +165,14 @@
                                     <button onclick="location.href = '/auth/pet-profile/{{this._id}}'">Edit Pet Profile</button>
                                     <button>Remove Pet</button>
                                     </p>
-                                </li>
+                        
                             {{/each}}
-                        </ul>
+                  
                     {{/if}}
                 </div>
+
+            <button type="button"class="btn btn-primary" onclick="window.location.href='/auth/pet-signup'">Register a Pet</button>
+
             </div>
         </div>
     </div>
