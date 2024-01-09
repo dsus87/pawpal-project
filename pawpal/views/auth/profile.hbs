@@ -82,11 +82,11 @@
             <div class="col">
                 <div class="text-start mb-3">
                     <h5 class="mb-3">Which services do you offer?</h5>
-                    <input type="checkbox" id="Pet Boarding" name="services" value="Pet Boarding">
+                    <input type="checkbox"class="form-check-input"  id="Pet Boarding" name="services" value="Pet Boarding">
                     <label for="Pet Boarding">Pet Boarding</label>
-                    <input type="checkbox" id="Dog Walking" name="services" value="Dog Walking">
+                    <input type="checkbox" class="form-check-input" id="Dog Walking" name="services" value="Dog Walking">
                     <label for="Dog Walking">Dog Walking</label>
-                    <input type="checkbox" id="Pet Sitting" name="services" value="Pet Sitting">
+                    <input type="checkbox" class="form-check-input" id="Pet Sitting" name="services" value="Pet Sitting">
                     <label for="Pet Sitting">Pet Sitting</label>
                 </div>
             </div>
@@ -96,9 +96,9 @@
             <div class="col">    
                 <div class="text-start mb-3">
                     <h5 class="mb-3">Select your role</h5>
-                    <input type="checkbox" id="Pet Sitter" name="role" value="Pet Sitter">
+                    <input  class="form-check-input"  type="checkbox" id="Pet Sitter" name="role" value="Pet Sitter">
                     <label for="Pet Sitter">Pet Sitter</label>
-                    <input type="checkbox" id="Pet Owner" name="role" value="Pet Owner">
+                    <input class="form-check-input"  type="checkbox" id="Pet Owner" name="role" value="Pet Owner">
                     <label for="Pet Owner">Pet Owner</label>
                 </div>
             </div>
@@ -146,7 +146,7 @@
 
 
 
-
+ <div class="row justify-content-center">
                 </div>
              
                             {{#each pets}}
@@ -162,19 +162,22 @@
                                     {{/if}}
 
                                     <p>
-                                    <button onclick="location.href = '/auth/pet-profile/{{this._id}}'">Edit Pet Profile</button>
-                                    <button>Remove Pet</button>
+                                    <button onclick="location.href = '/auth/pet-profile/{{this._id}}'" class="btn btn-primary">Edit Pet Profile</button>
+                                   
                                     </p>
                         
                             {{/each}}
                   
                     {{/if}}
+
+                    <button type="button"class="btn btn-primary" onclick="window.location.href='/auth/pet-signup'">Register a Pet</button>
                 </div>
 
-            <button type="button"class="btn btn-primary" onclick="window.location.href='/auth/pet-signup'">Register a Pet</button>
+            
 
             </div>
         </div>
+    </div>
     </div>
 </section>
 
