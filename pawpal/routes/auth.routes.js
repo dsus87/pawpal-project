@@ -183,10 +183,6 @@ router.post("/login",isLoggedOut, (req, res)=>{
               res.render('auth/login', { errorMessage: 'Something went wrong. Please try again.' });
           });
   })
-  .catch(err => {
-      console.log(err);
-      res.render('auth/login', { errorMessage: 'Something went wrong. Please try again.' });
-  });
 });
 
 /* POST Logout page */
