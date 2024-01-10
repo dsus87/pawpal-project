@@ -212,6 +212,16 @@ router.post('/logout', isLoggedIn, (req, res, next) => {
 
 
 
+/* GET Find My Pet Page */
+router.get("/find-my-pet", async (req, res, next) => {
+    try {
+        const allPets = await Pet.find({});
+        res.render('find-my-pet', { title: "Find My Pet", allPets });
+    } catch (error) {
+        next(error);
+    }
+});
+
 
 /* GET Public Pet Profile page */
 router.get("/pet/:_id", (req, res, next) => {
@@ -322,6 +332,8 @@ router.get("/auth/delete-pet/:_id", isLoggedIn, (req, res, next) => {
             res.status(500).render("error", { message: "An error occurred while deleting the pet." });
         });
 });
+
+
  
 /* GET Search Page for Pet Sitter*/
 router.get("/all-sitters", async (req, res, next) => {
