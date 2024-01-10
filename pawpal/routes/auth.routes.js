@@ -315,7 +315,7 @@ router.get("/auth/delete-pet/:_id", isLoggedIn, (req, res, next) => {
             return User.findByIdAndUpdate(req.session.currentUser._id, { $pull: { pets: _id } });
         })
         .then(() => {
-            res.redirect('/auth/profile/' + req.session.currentUser.username); // Redirect my private profile page
+            res.redirect('/auth/profile/' + req.session.currentUser.username); // Redirect to my private profile page
         })
         .catch((err) => {
             console.error(err);
