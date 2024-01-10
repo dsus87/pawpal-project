@@ -300,6 +300,28 @@ router.post("/auth/pet-profile", isLoggedIn, upload.single('photo'), (req, res, 
         });
 });
 
+/* DELETE Pet (private) page */
+router.get("/auth/delete-pet/:_id", isLoggedIn, (req, res, next) => {
+    const { _id } = req.params;
+
+    // Find the pet by ID and remove it
+    Pet.findOneAndDelete({ _id })
+        .then((deletedPet) => {
+            if (!deletedPet) {
+                return res.status(404).render("error", { message: "Pet not found." });
+            }
+
+            // Remove the pet ID from the user's pets array
+            return User.findByIdAndUpdate(req.session.currentUser._id, { $pull: { pets: _id } });
+        })
+        .then(() => {
+            res.redirect('/auth/profile/' + req.session.currentUser.username); // Redirect my private profile page
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).render("error", { message: "An error occurred while deleting the pet." });
+        });
+});
  
 /* GET Search Page for Pet Sitter*/
 router.get("/all-sitters", async (req, res, next) => {
