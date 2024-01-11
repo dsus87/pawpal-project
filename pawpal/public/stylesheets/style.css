@@ -9,13 +9,16 @@
 --bg-200:#f5f4f1;
 --bg-300:#cccbc8; */
   
-
+.bg-light {
+  --bs-bg-opacity: 0; 
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
 
 body {
   padding: 25px;
   font: 10px;
   font-family: 'Open Sans', sans-serif;
-  background-color: #FFF0E6;
+  --bs-body-bg: #FFF0E6;
 }
 
 a {
