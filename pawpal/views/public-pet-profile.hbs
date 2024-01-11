@@ -5,6 +5,86 @@
   <p><strong>Animal:</strong> {{pet.animal}}</p>
   <p><strong>Breed:</strong> {{pet.breed}}</p>
   <p><strong>Age:</strong> {{pet.age}}</p>
+  <p><strong>Temperament:</strong> {{pet.temperament}}</p>
+  <p><strong>About:</strong> {{pet.about}}</p>
+
+  {{#if pet.photo}}
+    <img src="/{{pet.photo}}" alt="{{pet.name}}" style="width: 200px; height: 200px;">
+  {{else}}
+    <p>No photo available.</p>
+  {{/if}}
+
+  <!-- Comments Section -->
+  <section id="Comments" class="mt-5 pb-3">
+    <div class="container-lg">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <div class="text-center">
+            <h2>User Comments</h2>
+          </div>
+          {{#each comments}}
+            <p class="lead my-4">
+              <strong>Comment by:</strong> {{this.author.username}}<br>
+              <strong>Content:</strong> {{this.content}}<br>
+              <strong>Rating:</strong> {{this.rating}}/5<br>
+              <br>
+            </p>
+          {{/each}}
+
+          {{#if comments}}
+          {{else}}
+            <p>No comments available.</p>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leave a Comment Section -->
+  <section id="LeaveComment" class="mt-5 pb-3">
+    <div class="container-lg">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <div class="text-center">
+            <h2>Leave a Comment</h2>
+          </div>
+          <div>
+            <form action="/pet/{{pet._id}}/comment" method="POST">
+              <div>
+                <label for="content">Comment:</label><br>
+                <textarea name="content" id="content" rows="4" cols="50" required></textarea>
+              </div>
+              <div>
+                <label for="rating">Rating:</label><br>
+                <select name="rating" id="rating" required>
+                  <option value="1">1 Star</option>
+                  <option value="2">2 Stars</option>
+                  <option value="3">3 Stars</option>
+                  <option value="4">4 Stars</option>
+                  <option value="5">5 Stars</option>
+                </select>
+              </div>
+              <div>
+                <button type="submit">Submit Comment</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{{else}}
+  <p>Pet not found.</p>
+{{/if}}
+
+{{!-- <h1>Public Pet Profile</h1>
+
+{{#if pet}}
+  <h2>{{pet.name}}</h2>
+  <p><strong>Animal:</strong> {{pet.animal}}</p>
+  <p><strong>Breed:</strong> {{pet.breed}}</p>
+  <p><strong>Age:</strong> {{pet.age}}</p>
   <!-- Add other pet details as needed -->
 
   {{#if pet.photo}}
@@ -14,4 +94,4 @@
   {{/if}}
 {{else}}
   <p>Pet not found.</p>
-{{/if}}
+{{/if}} --}}
