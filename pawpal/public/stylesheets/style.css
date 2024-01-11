@@ -14,8 +14,20 @@
   background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
 }
 
+
+.navbar {
+  margin-top: 0 !important;
+  width: 100vw;
+
+  
+}
+
+.footer{
+  width: 100vw;
+}
+
 body {
-  padding: 25px;
+ 
   font: 10px;
   font-family: 'Open Sans', sans-serif;
   --bs-body-bg: #FFF0E6;
