@@ -12,44 +12,53 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<<<<<<< HEAD
 
 
 <nav class="navbar navbar-expand-sm nav-fill bg-light fw-bol" style="background-color: transparent !important;">
+=======
+<nav class="navbar navbar-expand-sm nav-fill bg-light fw-bol">
+>>>>>>> ca54e05511b486e1aa9bf5fb64445050b36c327a
   <div class="container-fluid">
 
     <a class="navbar-brand" href="/">
-      <img src="/images/pawpal-logo.png" alt="Pawpal Logo" style="width:50px;" > 
+      <img src="/images/pawpal-logo.png" alt="Pawpal Logo" style="width:50px;">
     </a>
 
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" href="/">Home</a>
       </li>
-      {{!-- <li class="nav-item">
-        <a class="nav-link" href="/">Pets</a>
-      </li> --}}
       <li class="nav-item">
         <a class="nav-link" href="/all-sitters">Pet Sitters</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{#if currentUser}}/auth/profile/{{currentUser.username}}{{else}}/login{{/if}}">My Profile</a>
+        <a class="nav-link" href="/find-my-pet">Find My Pet</a>
       </li>
+      
+      {{#if currentUser}}
       <li class="nav-item">
-        <a class="nav-link" href="/signup">Signup</a>
+         <a class="nav-link" href="/auth/profile/{{currentUser.username}}">My Profile</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/login">Login</a>
-      </li>
-      <li class="nav-item">
-        <form id="logout-form" action="/logout" method="POST">
-          <button class="btn btn-outline-secondary" type="submit">Logout</button>
-        </form>
-      </li>
-    </ul>
-  </div>
-</nav>
+      <li class="nav-item">        
+          <form id="logout-form" action="/logout" method="POST">
+            <button class="btn btn-outline-secondary" type="submit">Logout</button>
+          </form>
+          </li>
+        {{else}}
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">Signup</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        {{/if}}
+      </ul>
+    </div>
+  </nav>
 
 
+<<<<<<< HEAD
 
 
 <div class="container-lg pt-5 mb-5"> 
@@ -60,9 +69,64 @@
 
 
 
+=======
+{{{body}}}
+
+>>>>>>> ca54e05511b486e1aa9bf5fb64445050b36c327a
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/js/script.js"></script>
+
+
+<footer class="footer mt-auto py-3" style="background-color: #3b82f680;">
+    <div class="container">
+        <div class="row">
+            <!-- Learn More Column -->
+            <div class="col-md-4">
+                <h5 style="color: white; font-size: 24px;">Learn More</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" style="color: white; text-decoration: none;">How does PawPal work</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">FAQ for Pet Owners</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">FAQ for Pet Sitters</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Dog Walking</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Dog Sitting</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Cat Sitting</a></li>
+                </ul>
+            </div>
+            
+            <!-- About PawPal Column -->
+            <div class="col-md-4">
+                <h5 style="color: white; font-size: 24px;">About PawPal</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" style="color: white; text-decoration: none;">Our Story</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">In the Press</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Help</a></li>
+                </ul>
+            </div>
+            
+            <!-- Find Us On Column -->
+            <div class="col-md-4">
+                <h5 style="color: white; font-size: 24px;">Find us on</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" style="color: white; text-decoration: none;">Facebook</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Instagram</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Copyright and Policies Section -->
+        <div class="row" style="background-color: #3b82f68;">
+            <div class="col-md-12 text-center">
+                <p class="text-muted">
+                    Copyright © 2013-2024 Pawpal Inc. All Rights Reserved.
+                    <br>
+                    <a href="#" style="color: white; text-decoration: none;">Terms and Conditions</a> | <a href="#" style="color: white; text-decoration: none;">Privacy & Cookie Policy</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>

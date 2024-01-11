@@ -183,10 +183,6 @@ router.post("/login",isLoggedOut, (req, res)=>{
               res.render('auth/login', { errorMessage: 'Something went wrong. Please try again.' });
           });
   })
-  .catch(err => {
-      console.log(err);
-      res.render('auth/login', { errorMessage: 'Something went wrong. Please try again.' });
-  });
 });
 
 /* POST Logout page */
@@ -211,6 +207,16 @@ router.post('/logout', isLoggedIn, (req, res, next) => {
 });
 
 
+
+/* GET Find My Pet Page */
+router.get("/find-my-pet", async (req, res, next) => {
+    try {
+        const allPets = await Pet.find({});
+        res.render('find-my-pet', { title: "Find My Pet", allPets });
+    } catch (error) {
+        next(error);
+    }
+});
 
 
 /* GET Public Pet Profile page */
@@ -315,13 +321,15 @@ router.get("/auth/delete-pet/:_id", isLoggedIn, (req, res, next) => {
             return User.findByIdAndUpdate(req.session.currentUser._id, { $pull: { pets: _id } });
         })
         .then(() => {
-            res.redirect('/auth/profile/' + req.session.currentUser.username); // Redirect my private profile page
+            res.redirect('/auth/profile/' + req.session.currentUser.username); // Redirect to my private profile page
         })
         .catch((err) => {
             console.error(err);
             res.status(500).render("error", { message: "An error occurred while deleting the pet." });
         });
 });
+
+
  
 /* GET Search Page for Pet Sitter*/
 router.get("/all-sitters", async (req, res, next) => {
