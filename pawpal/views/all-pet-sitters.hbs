@@ -11,24 +11,26 @@
 </head>
 
 <body>
-<h1>Find Pawpals near you</h1>
+{{!-- <h1>Find Pawpals near you</h1> --}}
 
 <div class="container-lg my-4">
+  
     <div class="row">
         <div class="col-md-3">
-            <div class="border rounded shadow-sm p-3">
+            
+            <div class="border rounded shadow-sm p-3" style="background-color: white;">
                 <h4 class="fw-bold">Filters</h4>
                 <div class="mb-3">
                     <label for="filterLocation" class="form-label">Location</label>
-                    <input type="text" class="form-control" id="filterLocation" placeholder="Enter location">
+                    <input type="text" class="form-control" style="background-color: white;" id="filterLocation" placeholder="Enter location">
                 </div>
                 <div class="mb-3">
                     <label for="filterLocation" class="form-label">Service</label>
-                    <input type="text" class="form-control" id="filterLocation" placeholder="Enter Service">
+                    <input type="text" class="form-control" style="background-color: white;" id="filterLocation" placeholder="Enter Service">
                 </div>
                 <div class="mb-3">
                     <label for="filterLocation" class="form-label">Availability</label>
-                    <input type="text" class="form-control" id="filterLocation" placeholder="Enter Availability">
+                    <input type="text" style="background-color: white;" class="form-control" id="filterLocation" placeholder="Enter Availability">
                 </div>
             </div>
         </div>
@@ -36,13 +38,13 @@
         <!-- Pet Sitters Profiles Column -->
         <div class="col-md-9">
             {{#each petSitters}}
-            <div class="row border rounded shadow-sm overflow-hidden my-3">
-                <div class="col-md-4 p-0">
+            <div class="row border rounded shadow-sm overflow-hidden mb-3" style="background-color: white;">
+                <div class="col-md-3 p-0">
                     <div class="square-image-container">
                         <img class="img-fluid" src="/{{photo}}" alt="Profile Picture">
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <div class="p-3">
                         
                        <a href="profile/{{this.username}}"> <h3 class="fw-bold">{{this.name}}</h3> </a>

@@ -30,7 +30,7 @@ body {
  
   font: 10px;
   font-family: 'Open Sans', sans-serif;
-  --bs-body-bg: #FFF0E6;
+  --bs-body-bg: #ffffff;
 }
 
 a {
@@ -44,7 +44,8 @@ h1 {
 }
 
 p {
-  font-family: 'Open Sans', sans-serif;font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+
 }
 
 .square-image-container {
