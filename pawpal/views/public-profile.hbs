@@ -1,98 +1,81 @@
-{{#if errorMessage}}
+{{!-- {{#if errorMessage}}
     <div style="color: red; margin-bottom: 10px;">{{errorMessage}}</div>
 {{/if}}
+ --}}
 
-
-
-
-
-
-<div class="container-lg">
-    <div class="row justify-content-center">
-        <div class="col-md-5 text-center d-none d-md-block px-4">
+<div class="container">
+  <!-- Row for the two main columns -->
+  <div class="row">
+    <!-- Left column (4 units) -->
+    <div class="col-md-4">
+      <!-- Section for the image -->
+      <div class="border rounded shadow-sm p-3" style="background-color: white;">
         <img class ="img-fluid rounded" src="{{photo}}" alt="Profile Picture">
-          
       </div>
-      <div class="col-md-5 text-center text-md-start">
-         <h1>Welcome to {{name}}'s profile page!</h1>
-        <h1>
-          {{!-- <div class = "display-4">Welcome to Pawpal</div> --}}
-          
-          <div class = "display-6 "> About </div>
-              </h1>
-             <p class ="lead my-4">
-              <strong>Name:</strong> {{name}}<br>
+
+      <!-- Section for general info -->
+      <div class="border rounded shadow-sm p-3 mt-3" style="background-color: white;">
+        <p>About</p>
+             <strong>Name:</strong> {{name}}<br>
              <strong>Email:</strong> {{email}}<br>
-           <strong>Location:</strong> {{location}}<br>
-          
-        </p>
+             <strong>Location:</strong> {{location}}<br>
+             <strong>Availability</strong> {{availability}}<br>
       </div>
-    
+    </div>
+
+    <!-- Right column (8 units) -->
+    <div class="col-md-8">
+      <!-- Section for 'About me' -->
+      <div class="border rounded shadow-sm p-3" style="background-color: white;">
+        <h2>About Me</h2>
+        <p>{{about}}</p>
+      </div>
+
+
+  <!-- Section for 'Services' -->
+  <div class="border rounded shadow-sm p-3 mt-3" style="background-color: white;">
+  <div class="mt-3">
+    {{!-- <h2>Services</h2> --}}
+    <div class="services-container" style="display: flex; justify-content: space-evenly;">
+      {{#each services}}
+        <div class="service">
+     
+          {{#if (eq this 'Pet Boarding')}}
+            <img src="/images/boarding-logo.png" style="max-width: 200px; max-height: 100px;" alt="Pet Boarding">
+          {{else if (eq this 'Dog Walking')}}
+            <img src="/images/walking-logo.png" style="max-width: 200px; max-height: 100px;" alt="Dog Walking">
+          {{else if (eq this 'Pet Sitting')}}
+            <img src="/images/pet-sitting-logo.png" style="max-width: 200px; max-height: 100px;" alt="Pet Sitting"> 
+            
+          {{/if}}
+           <p>{{this}}</p>
+              
+        </div>
+      {{/each}}
     </div>
   </div>
+</div>
 
+      <!-- Section for 'User Reviews' -->
+      <div class="border rounded shadow-sm p-3 mt-3" style="background-color: white;">
+      <div class="mt-3">
+  <h2>User Reviews</h2>
+  {{#each reviews}}
+    <div class="border rounded shadow-sm p-3 my-3" style="background-color: white;">
+      <p class="lead">
+        <strong>Comment by:</strong> {{this.author.username}}<br>
+        <strong>Content:</strong> {{this.content}}<br>
+        <strong>Rating:</strong> {{this.rating}}/5
+      </p>
+    </div>
+  {{/each}}
+</div>
+      </div>
 
- <section id="AboutMe" class="mt-5 pb-3">
-    
-        <div class="container-lg">
-            <div class="row justify-content-center">
-                <div class="col-md-10">
-                    <div class="text-center">
-   
-                        <h2 class="mt-4">About Me</h2>
-                    </div>
-                     <p class ="lead my-4">
-                    {{about}}
-                    </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-
- <section id="Reviews" class="mt-5 pb-3">
-        <div class="container-lg">
-            <div class="row justify-content-center">
-                <div class="col-md-10">
-                    <div class="text-center">
-                        <h2>User Reviews</h2>
-                    </div>
-                    {{#each reviews}}
-                     <p class ="lead my-4">
-                        <strong>Comment by:</strong> {{this.author.username}}<br>
-                        <strong>Content:</strong> {{this.content}}<br>
-                        <strong>Rating:</strong> {{this.rating}}/5<br>
-                        <br>
-                     {{/each}}
-                    
-                        {{#if reviews}}
-                        
-                        
-                        {{else}}
-                            <p>No comments available.</p>
-                        {{/if}}
-                    </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
- <section id="AboutMe" class="mt-5 pb-3">
-        <div class="container-lg">
-            <div class="row justify-content-center">
-                <div class="col-md-10">
-                    <div class="text-center">
-                         <h2>Leave a Comment</h2>
-                    </div>
-                   <div>
-   
-        <form action="/profile/{{username}}/comment" method="POST">
+      <!-- Section for 'Leave a Review' -->
+      <div class="border rounded shadow-sm p-3 mt-3" style="background-color: white;">
+        <h2>Leave a Review</h2>
+         <form action="/profile/{{username}}/comment" method="POST">
             <div>
                 <label for="content">Comment:</label><br>
                 <textarea name="content" id="content" rows="4" cols="50" required></textarea>
@@ -111,19 +94,10 @@
                 <button type="submit">Submit Comment</button>
             </div>
         </form>
+      </div>
     </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-
-
-    <!-- Comment Form -->
-    
+  </div>
+</div>
 
 
 
