@@ -45,18 +45,24 @@ const userSchema = new Schema(
       type: String,
     },
 
-    availability: { 
+    availability: {   // boolean 
       type: String, 
       enum: ['Available', 'Unavailable'] 
     },
+
+
     services: [{ 
       type: String, 
       enum: ['Pet Boarding', 'Dog Walking', 'Pet Sitting'],
     }],
+
+
     pets: [{ 
       type: Schema.Types.ObjectId, 
-      ref: 'Pet' 
+      ref: 'Pet'       //  the relationship is on pet should be only referring to only owner should not be in the user model
     }],
+
+
     reviews: [{ 
       type: Schema.Types.ObjectId, 
       ref: 'Comment' 
