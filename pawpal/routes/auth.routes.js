@@ -9,7 +9,7 @@ const upload = multer({ dest: 'uploads/' });
 const User = require("../models/User.model");
 const Pet = require("../models/Pet.model");
 const Comment = require("../models/Comment.model");
-const Services = require("../models/Services.model");
+
 
 const { isLoggedIn, isLoggedOut } = require('../middlewares/route-guard');
 
@@ -75,7 +75,7 @@ router.get("/auth/profile/:username", isLoggedIn, (req, res, next) => {
 
 /* POST Private Profile Page  */
 router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, next) => {
-    const { username, email, password, name, location, role, about,  availability, services } = req.body;
+    const { username, email, password, name, location, role, about,  availability, services,price } = req.body;
     const userId = req.session.currentUser._id;
 
     User.findOne({ username: username, _id: { $ne: userId } })
@@ -86,7 +86,7 @@ router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, ne
                     errorMessage: "Username already taken."
                 });
             } else {
-                const updateData = { username, email, password, name, location, role, about, availability,services };
+                const updateData = { username, email, password, name, location, role, about, availability,services,price };
                 
                 if (req.file) {
                     updateData.photo = req.file.path;
@@ -346,7 +346,7 @@ router.get("/all-sitters", (req, res, next) => {
 
     User.find(query)
         .then(petSitters => {
-            res.render('all-pet-sitters', { title: "All Pet Sitters Search", petSitters });
+            res.render('all-pet-sitters', { petSitters });
         })
         .catch(error => {
             next(error);
@@ -367,8 +367,8 @@ router.post('/profile/:username/comment', isLoggedIn, (req, res, next) => {
             profileUser = user;
 
             const newComment = new Comment({
-                author: req.session.currentUser._id, // Set the author of the comment to the current logged-in user
-                relatedPet: user._id, // 
+                author: req.session.currentUser._id, 
+                relatedPet: user._id, 
                 content,
                 rating
             });

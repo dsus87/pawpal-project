@@ -57,6 +57,9 @@ const userSchema = new Schema(
       enum: ['Pet Boarding', 'Dog Walking', 'Pet Sitting'],
     }],
 
+    price: { 
+      type: Number,
+    },
 
     pets: [{ 
       type: Schema.Types.ObjectId, 
