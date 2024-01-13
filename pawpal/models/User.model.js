@@ -25,12 +25,14 @@ const userSchema = new Schema(
     },
     name: {
       type: String,
-      required: [true, "Name is required."],
+      // required: [true, "Name is required."],
     },
     
-    location: {
-      type: String,
+    location: { 
+      type: String, 
+      enum: ['Berlin', 'Amsterdam', 'Portugal'],
     },
+
     photo:{ 
       type: String,
     },
@@ -45,18 +47,26 @@ const userSchema = new Schema(
       type: String,
     },
 
-    availability: { 
-      type: String, 
-      enum: ['Available', 'Unavailable'] 
+    availability: {
+      type: Boolean,
+      default: true 
     },
+
     services: [{ 
       type: String, 
       enum: ['Pet Boarding', 'Dog Walking', 'Pet Sitting'],
     }],
+
+    price: { 
+      type: Number,
+    },
+
     pets: [{ 
       type: Schema.Types.ObjectId, 
-      ref: 'Pet' 
+      ref: 'Pet'       
     }],
+
+
     reviews: [{ 
       type: Schema.Types.ObjectId, 
       ref: 'Comment' 

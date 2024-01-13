@@ -19,22 +19,59 @@
         <div class="col-md-3">
             
             <div class="border rounded shadow-sm p-3" style="background-color: white;">
-                <h4 class="fw-bold">Filters</h4>
-                <div class="mb-3">
-                    <label for="filterLocation" class="form-label">Location</label>
-                    <input type="text" class="form-control" style="background-color: white;" id="filterLocation" placeholder="Enter location">
-                </div>
-                <div class="mb-3">
-                    <label for="filterLocation" class="form-label">Service</label>
-                    <input type="text" class="form-control" style="background-color: white;" id="filterLocation" placeholder="Enter Service">
-                </div>
-                <div class="mb-3">
-                    <label for="filterLocation" class="form-label">Availability</label>
-                    <input type="text" style="background-color: white;" class="form-control" id="filterLocation" placeholder="Enter Availability">
-                </div>
+                
+                <!-- Filter Form -->
+        <form action="/all-sitters" method="get">
+
+    <div  style="background-color: white;">
+        <h4 class="fw-bold">Filters</h4>
+
+        <!-- Location Filter -->
+        <div class="mb-3">
+        <label class="form-label">Location</label>
+        <select class="form-control" name="location" id="filterLocation">
+            <option value="">Select Location</option>
+            <option value="Berlin">Berlin</option>
+            <option value="Amsterdam">Amsterdam</option>
+            <option value="Portugal">Portugal</option>
+        </select>
+    </div>
+
+        <!-- Service Filter -->
+        <div class="mb-3">
+            <label class="form-label">Service</label>
+            <select class="form-control" name="services" id="filterService">
+                <option value="">Select Service</option>
+                <option value="Pet Boarding">Boarding</option>
+                <option value="Pet Sitting">Sitting</option>
+                <option value="Dog Walking">Walking</option>
+            </select>
+
+
+
+
+        </div>
+        <!-- Availability Filter -->
+      <div class="mb-3">
+    <label class="form-label">Availability</label>
+    <select class="form-control" id="filterAvailability" name="availability">
+        <option value="">Select Availability</option>
+        <option value="true">Available</option>
+        <option value="false">Unavailable</option>
+    </select>
+</div>
+
+        <!-- Submit/Reset Button -->
+        <button type="submit" class="btn btn-primary">Apply Filters</button>
+        <button type="submit" class="btn btn-primary" >Reset</button>
+
+    </div>
+        </form>
             </div>
         </div>
         
+
+
         <!-- Pet Sitters Profiles Column -->
         <div class="col-md-9">
             {{#each petSitters}}
@@ -49,7 +86,14 @@
                         
                        <a href="profile/{{this.username}}"> <h3 class="fw-bold">{{this.name}}</h3> </a>
                         <p class="text-muted"><strong>Location:</strong> {{this.location}}</p>
-                        <p class="text-muted"><strong>Availability:</strong> {{this.availability}}</p>
+                        <p class="text-muted">
+                                     <strong>Availability:</strong> 
+                                         {{#if this.availability}}
+                                               Available
+                                                    {{else}}
+                                                        Unavailable
+                                                    {{/if}}
+                                                </p>
                         <p class="text-muted"><strong>Services:</strong> {{this.services}}</p>
                         <p class="text-muted">{{this.about}}</p>
                     </div>

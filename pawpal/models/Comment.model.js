@@ -7,14 +7,17 @@ const { Schema, model } = require("mongoose");
 const commentSchema = new Schema({
   author: { 
     type: Schema.Types.ObjectId, 
-    ref: 'User' 
+    ref: 'User',
+    required: true 
   },
   relatedPet: { 
     type: Schema.Types.ObjectId, 
-    ref: 'Pet' 
+    ref: 'Pet' ,
+    required: true 
   },
   content: {
   type: String,
+
   },
   rating: {
     type: Number,
