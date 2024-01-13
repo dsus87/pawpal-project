@@ -66,3 +66,51 @@ p {
   object-position: top; 
 }
 
+.connect-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px; /* Adjust the height as needed */
+}
+
+.connect-image img {
+  max-width: 50%;
+  max-height: 50%;
+}
+
+.choose-service-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px; /* Adjust the height as needed */
+}
+
+.choose-service-image img {
+  max-width: 50%;
+  max-height: 50%;
+}
+
+
+.meet-greet-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px; /* Adjust the height as needed */
+}
+
+.meet-greet-image img {
+  max-width: 50%;
+  max-height: 50%;
+}
+
+.verified-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px; /* Adjust the height as needed */
+}
+
+.verified-image img {
+  max-width: 50%;
+  max-height: 50%;
+}

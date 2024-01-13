@@ -3,8 +3,10 @@ const saltRounds = 10;
 const express = require('express');
 const router = express.Router();
 
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
+// const multer = require('multer');
+// const upload = multer({ dest: 'uploads/' });
+const fileUploader = require('../config/cloudinary.config');
+
 
 const User = require("../models/User.model");
 const Pet = require("../models/Pet.model");
@@ -22,9 +24,9 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
 });
 
 /* POST Signup  */
-router.post("/signup", isLoggedOut, upload.single('photo'), (req, res, next) => {
+router.post("/signup", isLoggedOut, fileUploader.single('photo'), (req, res, next) => {
     const { username, email, password, name, location, role, availability, services, pets, reviews } = req.body;
-
+console.log(req.file)
     User.findOne({ username: username })
     .then(user => {
         if (user) {
@@ -76,7 +78,7 @@ router.get("/auth/profile/:username", isLoggedIn, (req, res, next) => {
 
 
 /* POST Private Profile Page  */
-router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, next) => {
+router.post('/update-profile', isLoggedIn, fileUploader.single('photo'), (req, res, next) => {
     const { username, email, password, name, location, role, about,  availability, services, pets, reviews } = req.body;
     const userId = req.session.currentUser._id;
 
@@ -112,7 +114,7 @@ router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, ne
 
 
 /* GET Public Profile page */
-router.get("/profile/:username",upload.single('photo'), (req, res, next) => {
+router.get("/profile/:username", fileUploader.single('photo'), (req, res, next) => {
     const { username } = req.params;
     console.log("Username:", username);  
     User.findOne({ username })
@@ -243,7 +245,7 @@ router.get("/auth/pet-signup", isLoggedIn, (req, res, next) => {
 });
 
 /* Register a new Pet (private) page */  
-router.post("/auth/pet-signup", isLoggedIn, upload.single('photo'), (req, res, next) => {
+router.post("/auth/pet-signup", isLoggedIn, fileUploader.single('photo'), (req, res, next) => {
     const { name, animal, breed, age, temperament, about, healthAndDiet } = req.body;
     let createdPetId;
 
@@ -287,7 +289,7 @@ router.get("/auth/pet-profile/:_id", isLoggedIn, (req, res, next) => {
 
 
 /* Edit a Pet (private) page */  
-router.post("/auth/pet-profile", isLoggedIn, upload.single('photo'), (req, res, next) => {
+router.post("/auth/pet-profile", isLoggedIn, fileUploader.single('photo'), (req, res, next) => {
     console.log(req.body)
     const { name, animal, breed, age, temperament, about, healthAndDiet, _id } = req.body;
 
