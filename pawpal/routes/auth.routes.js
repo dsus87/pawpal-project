@@ -75,7 +75,7 @@ router.get("/auth/profile/:username", isLoggedIn, (req, res, next) => {
 
 /* POST Private Profile Page  */
 router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, next) => {
-    const { username, email, password, name, location, role, about,  availability } = req.body;
+    const { username, email, password, name, location, role, about,  availability, services } = req.body;
     const userId = req.session.currentUser._id;
 
     User.findOne({ username: username, _id: { $ne: userId } })
@@ -86,7 +86,7 @@ router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, ne
                     errorMessage: "Username already taken."
                 });
             } else {
-                const updateData = { username, email, password, name, location, role, about, availability };
+                const updateData = { username, email, password, name, location, role, about, availability,services };
                 
                 if (req.file) {
                     updateData.photo = req.file.path;
