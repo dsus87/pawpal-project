@@ -49,7 +49,7 @@ const userSchema = new Schema(
 
     availability: {
       type: Boolean,
-      default: true 
+  
     },
 
     services: [{ 
