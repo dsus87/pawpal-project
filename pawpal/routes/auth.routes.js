@@ -24,7 +24,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
 
 /* POST Signup  */
 router.post("/signup", isLoggedOut, fileUploader.single('photo'), (req, res, next) => {
-    const { username, email, password, name, location, role, availability, services, pets, reviews } = req.body;
+    const { username, email, password, name, location, role, availability, services, pets, reviews} = req.body;
 console.log(req.file)
     User.findOne({ username: username })
     .then(user => {
@@ -56,7 +56,7 @@ console.log(req.file)
 
 
 /* GET Private Profile page */
-router.get("/auth/profile/:username", isLoggedIn, (req, res, next) => {
+router.get("/auth/profile/:username", fileUploader.single('photo'),isLoggedIn, (req, res, next) => {
     const { username } = req.params; 
     User.findOne({ username })
     .populate('pets') 
@@ -77,7 +77,7 @@ router.get("/auth/profile/:username", isLoggedIn, (req, res, next) => {
 
 /* POST Private Profile Page  */
 router.post('/update-profile', isLoggedIn, fileUploader.single('photo'), (req, res, next) => {
-    const { username, email, password, name, location, role, about,  availability, services, pets, reviews } = req.body;
+    const { username, email, password, name, location, role, about,  availability, services, pets, reviews, price } = req.body;
     const userId = req.session.currentUser._id;
 
     User.findOne({ username: username, _id: { $ne: userId } })
@@ -91,6 +91,7 @@ router.post('/update-profile', isLoggedIn, fileUploader.single('photo'), (req, r
                 const updateData = { username, email, password, name, location, role, about, availability,services,price };
                 
                 if (req.file) {
+                    console.log("Uploaded file info:", req.file); 
                     updateData.photo = req.file.path;
                 }
 
