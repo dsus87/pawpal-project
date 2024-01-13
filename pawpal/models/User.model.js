@@ -25,12 +25,14 @@ const userSchema = new Schema(
     },
     name: {
       type: String,
-      required: [true, "Name is required."],
+      // required: [true, "Name is required."],
     },
     
-    location: {
-      type: String,
+    location: { 
+      type: String, 
+      enum: ['Berlin', 'Amsterdam', 'Portugal'],
     },
+
     photo:{ 
       type: String,
     },
@@ -45,11 +47,10 @@ const userSchema = new Schema(
       type: String,
     },
 
-    availability: {   // boolean 
-      type: String, 
-      enum: ['Available', 'Unavailable'] 
+    availability: {
+      type: Boolean,
+      default: true 
     },
-
 
     services: [{ 
       type: String, 
@@ -59,7 +60,7 @@ const userSchema = new Schema(
 
     pets: [{ 
       type: Schema.Types.ObjectId, 
-      ref: 'Pet'       //  the relationship is on pet should be only referring to only owner should not be in the user model
+      ref: 'Pet'       
     }],
 
 

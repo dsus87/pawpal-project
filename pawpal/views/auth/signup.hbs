@@ -18,51 +18,41 @@
 
 
 
-<div id="form">
 
-  <h2>Sign Up</h2>
+<div class="container">
+  <div class="row align-items-center">
+    
+    <form action="/login" method="POST" class="col-md-6">
 
-  <form action="/signup" method="POST" enctype="multipart/form-data">
 
-    <label for="username"> Username
-      <input type="text" name="username" id="username" placeholder="Your username" required/>
-    </label> <br>
+      <!-- Email Input -->
 
-    <label for="email"> Email
-      <input type="email" name="email" id="email" placeholder="Your email" required/>
-    </label>  <br>
+      <div class = "display-5">Sign Up </div>
+      <div class="mb-3">
+      
+        <label for="inputEmail" class="form-label">Email</label>
+        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="example@email.com">
+      </div>
+      <!-- Password Input -->
+      <div class="mb-3">
+        <label for="inputPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Enter your password">
+      </div>
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>
+    <!-- End of Form -->
 
-    <label for="password"> Password
-      <input type="password" name="password" id="password" placeholder="Your password" required/>
-    </label> <br>
+    <!-- Illustration Column -->
+    <div class="col-md-6 d-none d-md-block" style="">
+      <img src="/images/signup1.jpg" alt="sign up" class="img-fluid">
+    </div>
+  </div>
+</div>
 
-    <label for="name"> Name
-      <input type="text" name="name" id="name" placeholder="Your name" required/> </label> <br>
 
-    <label for="location"> Location
-      <input type="text" name="location" id="location" placeholder="Your location" />
-    </label> <br>
 
-       <label for="photo">Upload Photo:</label>
-    <input type="file" id="photo" name="photo"> <br>
 
-       <input type="checkbox" id="Pet Sitter" name="role" value="Pet Sitter">
-        <label for="Pet Sitter">Pet Sitter</label> <br>
- 
-        <input type="checkbox" id="Pet Owner" name="role" value="Pet Owner">
-        <label for="Pet Owner">Pet Owner</label> <br>
-
-    </label>
-
-    <label for="availability"> Availability
-      <select name="availability" id="availability"> <br>
-        <option value="Available">Available</option> <br>
-        <option value="Unavailable">Unavailable</option> <br>
-      </select>
-    </label>
- <br>
-  
-    <button type="submit">Sign Up</button> 
 
     {{#if errorMessage}}
       <p class="error">{{errorMessage}}</p>

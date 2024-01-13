@@ -10,7 +10,6 @@ const User = require("../models/User.model");
 const Pet = require("../models/Pet.model");
 const Comment = require("../models/Comment.model");
 const Services = require("../models/Services.model");
-const PetSitter = require("../models/PetSitter.model");
 
 const { isLoggedIn, isLoggedOut } = require('../middlewares/route-guard');
 
@@ -23,21 +22,19 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
 
 /* POST Signup  */
 router.post("/signup", isLoggedOut, upload.single('photo'), (req, res, next) => {
-    const { username, email, password, name, location, role, availability, services, pets, reviews } = req.body;
+    const { username, email, password, name, location, role, availability} = req.body;
 
     User.findOne({ username: username })
     .then(user => {
         if (user) {
-            // If a user with the same username exists, render an error message
             return res.render("auth/signup", { errorMessage: "Username already taken." });
         } else {
-            // If username is not taken, proceed to hash the password
             return bcrypt.hash(password, saltRounds);
         }
     })
 
     .then((hash) => {
-        const userData = { username, email, password: hash, name, location, role, availability, services, pets, reviews };
+        const userData = { username, email, password: hash, name, location, role, availability};
         
         if (req.file) {
             userData.photo = req.file.path;
@@ -60,7 +57,8 @@ router.post("/signup", isLoggedOut, upload.single('photo'), (req, res, next) => 
 router.get("/auth/profile/:username", isLoggedIn, (req, res, next) => {
     const { username } = req.params; 
     User.findOne({ username })
-        .populate('pets')  
+    .populate('pets') 
+    .populate('services')
         .then(user => {
             if (user) {
                 res.render('auth/profile', user);
@@ -77,7 +75,7 @@ router.get("/auth/profile/:username", isLoggedIn, (req, res, next) => {
 
 /* POST Private Profile Page  */
 router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, next) => {
-    const { username, email, password, name, location, role, about,  availability, services, pets, reviews } = req.body;
+    const { username, email, password, name, location, role, about,  availability } = req.body;
     const userId = req.session.currentUser._id;
 
     User.findOne({ username: username, _id: { $ne: userId } })
@@ -88,7 +86,7 @@ router.post('/update-profile', isLoggedIn, upload.single('photo'), (req, res, ne
                     errorMessage: "Username already taken."
                 });
             } else {
-                const updateData = { username, email, password, name, location, role, about, availability, services, pets, reviews };
+                const updateData = { username, email, password, name, location, role, about, availability };
                 
                 if (req.file) {
                     updateData.photo = req.file.path;
@@ -332,15 +330,28 @@ router.get("/auth/delete-pet/:_id", isLoggedIn, (req, res, next) => {
 
  
 /* GET Search Page for Pet Sitter*/
-router.get("/all-sitters", async (req, res, next) => {
-    try {
-        const petSitters = await User.find({ role: 'Pet Sitter' });
-        res.render('all-pet-sitters', { title: "All Pet Sitters Search", petSitters });
-    } catch (error) {
-        next(error);
-    }
-});
+router.get("/all-sitters", (req, res, next) => {
+    let query = { role: 'Pet Sitter' };
+    const { location, availability, services } = req.query;
 
+    if (location) {
+        query.location = location;
+    }
+    if (availability) {
+        query.availability = availability;
+    }
+    if (services) {
+        query.services = services;
+    }
+
+    User.find(query)
+        .then(petSitters => {
+            res.render('all-pet-sitters', { title: "All Pet Sitters Search", petSitters });
+        })
+        .catch(error => {
+            next(error);
+        });
+});
 
 /* POST Comment on Public Profile */
 router.post('/profile/:username/comment', isLoggedIn, (req, res, next) => {
@@ -357,7 +368,7 @@ router.post('/profile/:username/comment', isLoggedIn, (req, res, next) => {
 
             const newComment = new Comment({
                 author: req.session.currentUser._id, // Set the author of the comment to the current logged-in user
-                relatedPet: user._id, 
+                relatedPet: user._id, // 
                 content,
                 rating
             });
