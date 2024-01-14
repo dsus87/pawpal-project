@@ -117,6 +117,7 @@ router.get("/profile/:username", fileUploader.single('photo'), (req, res, next) 
     const { username } = req.params;
     console.log("Username:", username);  
     User.findOne({ username })
+     .populate('pets')
      .populate({
         path: 'reviews', 
         populate: { 
