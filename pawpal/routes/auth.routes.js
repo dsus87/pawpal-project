@@ -394,5 +394,45 @@ router.post('/profile/:username/comment', isLoggedIn, (req, res, next) => {
         });
 });
 
+/* POST Comment on Public Pet Profile */
+router.post('/pet/:petId/comment', isLoggedIn, (req, res, next) => {
+    const { petId } = req.params;
+    const { content, rating } = req.body;
+
+    let pet;
+
+    Pet.findById(petId)
+        .then(foundPet => {
+            if (!foundPet) {
+                throw new Error('Pet not found.');
+            }
+            pet = foundPet;
+
+            const newComment = new Comment({
+                author: req.session.currentUser._id,
+                relatedPet: pet._id,
+                content,
+                rating
+            });
+
+            // Save the new comment to the database
+            return newComment.save();
+        })
+        .then(savedComment => {
+            // Update the pet's document with the new comment ID
+            return Pet.findByIdAndUpdate(pet._id,
+                { $push: { reviews: savedComment._id } },
+            );
+        })
+        .then(() => {
+            // Redirect to the pet's profile page
+            res.redirect(`/pet/${petId}`);
+        })
+        .catch(err => {
+            console.error(err);
+            res.render("error", { message: "An error occurred while posting the comment." });
+        });
+});
+
 
 module.exports = router;

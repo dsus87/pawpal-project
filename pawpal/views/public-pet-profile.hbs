@@ -1,97 +1,77 @@
-<h1>Public Pet Profile</h1>
+<!-- Pet Profile Details -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <!-- Pet Image Section -->
+      <div class="border rounded shadow-sm p-3" style="background-color: #3b82f680; color:white">
+        <h3>Pet Profile</h3>
+        <img class="img-fluid rounded" src="{{pet.photo}}" alt="{{pet.name}}">
+      </div>
 
-{{#if pet}}
-  <h2>{{pet.name}}</h2>
-  <p><strong>Animal:</strong> {{pet.animal}}</p>
-  <p><strong>Breed:</strong> {{pet.breed}}</p>
-  <p><strong>Age:</strong> {{pet.age}}</p>
-  <p><strong>Temperament:</strong> {{pet.temperament}}</p>
-  <p><strong>About:</strong> {{pet.about}}</p>
-
-  {{#if pet.photo}}
-    <img src="/{{pet.photo}}" alt="{{pet.name}}" style="width: 200px; height: 200px;">
-  {{else}}
-    <p>No photo available.</p>
-  {{/if}}
-
-  <!-- Comments Section -->
-  <section id="Comments" class="mt-5 pb-3">
-    <div class="container-lg">
-      <div class="row justify-content-center">
-        <div class="col-md-10">
-          <div class="text-center">
-            <h2>User Comments</h2>
-          </div>
-          {{#each comments}}
-            <p class="lead my-4">
-              <strong>Comment by:</strong> {{this.author.username}}<br>
-              <strong>Content:</strong> {{this.content}}<br>
-              <strong>Rating:</strong> {{this.rating}}/5<br>
-              <br>
-            </p>
-          {{/each}}
-
-          {{#if comments}}
-          {{else}}
-            <p>No comments available.</p>
-          {{/if}}
-        </div>
+      <!-- General Info Section -->
+      <div class="border rounded shadow-sm p-3 mt-3" style="background-color: #3b82f680;color: white;">
+        <h3>Details</h3>
+        <p class="lead">
+          <strong>Name:</strong> {{pet.name}}<br>
+          <strong>Animal:</strong> {{pet.animal}}<br>
+          <strong>Breed:</strong> {{pet.breed}}<br>
+          <strong>Age:</strong> {{pet.age}}<br>
+          <strong>Temperament:</strong> {{pet.temperament}}<br>
+          <strong>Health and Diet:</strong> {{pet.healthAndDiet}}<br>
+        </p>
       </div>
     </div>
-  </section>
 
-  <!-- Leave a Comment Section -->
-  <section id="LeaveComment" class="mt-5 pb-3">
-    <div class="container-lg">
-      <div class="row justify-content-center">
-        <div class="col-md-10">
-          <div class="text-center">
-            <h2>Leave a Comment</h2>
+    <!-- Right column (8 units) -->
+    <div class="col-md-8">
+      <!-- Section for 'About me' -->
+      <div class="border rounded shadow-sm p-3 mt-3" style="background-color: white;">
+        <h3>About Me</h3>
+        <p class="lead">{{pet.about}}</p>
+      </div>
+
+      <!-- Section for 'User Reviews' -->
+      <div class="border rounded shadow-sm p-3 mt-3" style="background-color: white;">
+        <div class="mt-3">
+          <h3>Pet Reviews</h3>
+          {{#each reviews}}
+            <div class="border rounded shadow-sm p-3 my-3" style="background-color: white;">
+              <p class="lead">
+                <strong>Comment by:</strong> {{this.author.username}}<br>
+                <strong>Content:</strong> {{this.content}}<br>
+                <strong>Rating:</strong> {{this.rating}}/5
+              </p>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+
+      <!-- Section for 'Leave a Review' -->
+      <div class="border rounded shadow-sm p-3 mt-3" style="background-color: white;">
+        <h3>Leave a Review</h3>
+        <form action="/pet/{{pet._id}}/comment" method="POST">
+          <div>
+            <p class="lead">
+              <label for="content">Comment:</label><br>
+              <textarea name="content" id="content" rows="4" cols="50" required></textarea>
           </div>
           <div>
-            <form action="/pet/{{pet._id}}/comment" method="POST">
-              <div>
-                <label for="content">Comment:</label><br>
-                <textarea name="content" id="content" rows="4" cols="50" required></textarea>
-              </div>
-              <div>
-                <label for="rating">Rating:</label><br>
-                <select name="rating" id="rating" required>
-                  <option value="1">1 Star</option>
-                  <option value="2">2 Stars</option>
-                  <option value="3">3 Stars</option>
-                  <option value="4">4 Stars</option>
-                  <option value="5">5 Stars</option>
-                </select>
-              </div>
-              <div>
-                <button type="submit">Submit Comment</button>
-              </div>
-            </form>
+            <label for="rating">
+              <p class="lead">Rating:</p></label><br>
+            <select name="rating" id="rating" required>
+              <option value="1">1 Star</option>
+              <option value="2">2 Stars</option>
+              <option value="3">3 Stars</option>
+              <option value="4">4 Stars</option>
+              <option value="5">5 Stars</option>
+            </select>
           </div>
-        </div>
+          <div>
+            <br>
+            <button type="submit" class="btn btn-primary"> Submit</button>
+          </div>
+        </form>
       </div>
     </div>
-  </section>
-
-{{else}}
-  <p>Pet not found.</p>
-{{/if}}
-
-{{!-- <h1>Public Pet Profile</h1>
-
-{{#if pet}}
-  <h2>{{pet.name}}</h2>
-  <p><strong>Animal:</strong> {{pet.animal}}</p>
-  <p><strong>Breed:</strong> {{pet.breed}}</p>
-  <p><strong>Age:</strong> {{pet.age}}</p>
-  <!-- Add other pet details as needed -->
-
-  {{#if pet.photo}}
-    <img src="/{{pet.photo}}" alt="{{pet.name}}" style="width: 200px; height: 200px;">
-  {{else}}
-    <p>No photo available.</p>
-  {{/if}}
-{{else}}
-  <p>Pet not found.</p>
-{{/if}} --}}
+  </div>
+</div>
