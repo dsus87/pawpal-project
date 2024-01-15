@@ -104,6 +104,7 @@
                 <div class="row">
                   <div class="col">
                     <div class="mt-2 d-flex justify-content-end">
+                    <input type="hidden" id="_id" name="_id" value="{{pet._id}}"/>
                       <button type="submit" class="btn btn-primary">Save</button>
                       <a href="/auth/delete-pet/{{pet._id}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this pet?')">Delete Pet</a>
                     </div>
