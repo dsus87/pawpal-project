@@ -357,6 +357,30 @@ router.get("/all-sitters", (req, res, next) => {
         });
 });
 
+/* GET - Pets with Filters */
+router.get("/find-my-pet", (req, res, next) => {
+    let query = {};
+    const { animal, temperament } = req.query;
+
+    if (animal) {
+        query.animal = animal;
+    }
+    if (temperament) {
+        query.temperament = temperament;
+    }
+   
+    Pet.find(query)
+        .then(allPets => {
+            res.render('find-my-pet', { allPets });
+        })
+        .catch(error => {
+            next(error);
+        });
+});
+
+
+
+
 /* POST Comment on Public Profile */
 router.post('/profile/:username/comment', isLoggedIn, (req, res, next) => {
     const { username } = req.params;
