@@ -70,8 +70,9 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70px; /* Adjust the height as needed */
+  height: 70px; 
 }
+
 
 .connect-image img {
   max-width: 50%;
@@ -82,7 +83,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70px; /* Adjust the height as needed */
+  height: 70px; 
 }
 
 .choose-service-image img {
@@ -95,7 +96,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70px; /* Adjust the height as needed */
+  height: 70px;
 }
 
 .meet-greet-image img {
@@ -107,10 +108,11 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70px; /* Adjust the height as needed */
+  height: 70px; 
 }
 
 .verified-image img {
   max-width: 50%;
   max-height: 50%;
 }
+
