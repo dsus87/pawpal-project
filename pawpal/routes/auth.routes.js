@@ -163,6 +163,7 @@ router.post("/login",isLoggedOut, (req, res)=>{
   }
 
   User.findOne({ email }) 
+  .populate('pets') 
   .then(user => {
       if (!user) {
           console.log("Email not registered.");
@@ -210,21 +211,12 @@ router.post('/logout', isLoggedIn, (req, res, next) => {
 
 
 
-/* GET Find My Pet Page */
-router.get("/find-my-pet", async (req, res, next) => {
-    try {
-        const allPets = await Pet.find({});
-        res.render('find-my-pet', { title: "Find My Pet", allPets });
-    } catch (error) {
-        next(error);
-    }
-});
-
 
 /* GET Public Pet Profile page */
 router.get("/pet/:_id", (req, res, next) => {
     const { _id } = req.params;
     Pet.findById(_id)
+        
         .then(pet => {
             if (pet) {
                 res.render('public-pet-profile', { pet: pet.toObject() });
@@ -422,7 +414,6 @@ router.post('/profile/:username/comment', isLoggedIn, (req, res, next) => {
 router.post('/pet/:petId/comment', isLoggedIn, (req, res, next) => {
     const { petId } = req.params;
     const { content, rating } = req.body;
-
     let pet;
 
     Pet.findById(petId)
