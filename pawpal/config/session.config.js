@@ -1,6 +1,10 @@
 const session = require("express-session");
 const MongoStore = require('connect-mongo');
 
+
+const MONGO_URI =
+  process.env.MONGODB_URI;
+
 module.exports = app => {
 
     app.set('trust proxy', 1);
@@ -8,14 +12,14 @@ module.exports = app => {
       // use session
       app.use(
         session({
-          secret: process.env.SESS_SECRET || "your-default-secret-key",
+          secret: process.env.SESS_SECRET ,
           resave: true,
           secure: false,
           saveUninitialized: false,
           cookie: {
             maxAge: 1000 * 60 * 60,
         },
-      store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1:27017/pawpal' })
+      store: MongoStore.create({ mongoUrl: MONGO_URI })
     })
     );
   };
