@@ -13,6 +13,7 @@ module.exports = app => {
       app.use(
         session({
           secret: process.env.SESS_SECRET ,
+          secret: 'your-secret-key', // Your current secret key
           resave: true,
           secure: false,
           saveUninitialized: false,

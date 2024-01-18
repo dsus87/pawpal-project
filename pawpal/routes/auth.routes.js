@@ -3,8 +3,6 @@ const saltRounds = 10;
 const express = require('express');
 const router = express.Router();
 
-// const multer = require('multer');
-// const upload = multer({ dest: 'uploads/' });
 const fileUploader = require('../config/cloudinary.config');
 
 
