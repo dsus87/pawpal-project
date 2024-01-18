@@ -53,32 +53,28 @@
         </div>
 
         <!-- Pets Profiles Column -->
-        <div class="col-md-9">
-            {{#each allPets}}
-            <div class="row border rounded shadow-sm overflow-hidden my-3">
-                <div class="col-md-4 p-0">
-                    <div class="square-image-container">
-                        <img class="img-fluid" src="{{photo}}" alt="Pet Photo">
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="p-3">
-                        <h3 class="fw-bold">{{name}}</h3>
-                        <p class="text-muted"><strong>Animal:</strong> {{animal}}</p>
-                        <p class="text-muted"><strong>Breed:</strong> {{breed}}</p>
-                        <p class="text-muted"><strong>Age:</strong> {{age}}</p>
-                        <p class="text-muted"><strong>Temperament:</strong> {{temperament}}</p>
-                        <p class="text-muted"><strong>About:</strong> {{about}}</p>
-                        <p class="text-muted"><strong>Health and Diet:</strong> {{healthAndDiet}}</p>
-
-                        <!-- Add a link to the public pet profile -->
-                        <a href="/pet/{{_id}}">View Profile</a>
-                    </div>
-                </div>
+<div class="col-md-9">
+    {{#each allPets}}
+    <div class="row border rounded shadow-sm overflow-hidden mb-3">
+        <div class="col-md-3 p-3">
+            <div class="rectangle-image-container rounded">
+                <img class="img-fluid rounded" src="{{photo}}" style="object-fit: cover; border-radius: 5px;" alt="Pet Photo">
             </div>
-            {{/each}}
+        </div>
+        <div class="col-md-7">
+            <div class="p-3">
+                <!-- Use the pet's name as a link to the public pet profile -->
+                <h3 class="fw-bold"><a href="/pet/{{_id}}">{{name}}</a></h3>
+                <p class="text-muted"><strong>Animal:</strong> {{animal}}</p>
+                <p class="text-muted"><strong>Breed:</strong> {{breed}}</p>
+                <p class="text-muted"><strong>Age:</strong> {{age}}</p>
+                <p class="text-muted"><strong>Temperament:</strong> {{temperament}}</p>
+                <p class="text-muted"><strong>About:</strong> {{about}}</p>
+                <p class="text-muted"><strong>Health and Diet:</strong> {{healthAndDiet}}</p>
+            </div>
         </div>
     </div>
+    {{/each}}
 </div>
 
 
