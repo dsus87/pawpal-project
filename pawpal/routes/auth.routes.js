@@ -23,6 +23,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
 /* POST Signup  */
 router.post("/signup", isLoggedOut, fileUploader.single('photo'), (req, res, next) => {
     const { username, email, password, name, location, role, availability, services, pets, reviews} = req.body;
+    console.log(req.body)
 console.log(req.file)
     User.findOne({ username: username })
     .then(user => {
@@ -173,7 +174,7 @@ router.post("/login",isLoggedOut, (req, res)=>{
           .then(match => {
               if (match) {
                 req.session.currentUser = user;
-                res.render('auth/profile', user);
+                res.redirect(`auth/profile/${user.username}`); // interpolation /template literals
               } else {
                   console.log("Incorrect password.");
                   res.render('auth/login', { errorMessage: 'Incorrect email and/or password.' });
