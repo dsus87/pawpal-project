@@ -174,7 +174,7 @@ router.post("/login",isLoggedOut, (req, res)=>{
           .then(match => {
               if (match) {
                 req.session.currentUser = user;
-                res.redirect(`auth/profile/${user.username}`); // interpolation /template literals
+                res.redirect(`auth/profile/${user.username}`); // interpolation /template literals // get route for render 
               } else {
                   console.log("Incorrect password.");
                   res.render('auth/login', { errorMessage: 'Incorrect email and/or password.' });
@@ -211,27 +211,31 @@ router.post('/logout', isLoggedIn, (req, res, next) => {
 
 
 
-/* GET Public Pet Profile page */
 router.get("/pet/:_id", (req, res, next) => {
     const { _id } = req.params;
+
     Pet.findById(_id)
         .populate({
             path: 'comments',
             populate: {
-            path: 'author',
-            model: 'User',
-            select: 'username'
+                path: 'author',
+                model: 'User',
+                select: 'username'
             }
         })
         .then(pet => {
-            if (pet) {
-                res.render('public-pet-profile', { pet: pet.toObject() });
-            } else {
-                res.render("error", { message: "Pet not found." });
+            if (!pet) {
+                throw new Error("Pet not found.");
             }
+            // Find the owner of the pet by searching the 'User' collection where the pet's id is listed under 'pets'.
+
+            return User.findOne({ pets: _id }).select('username email location').then(owner => {  
+                res.render('public-pet-profile', { pet: pet.toObject(), owner });   // Rendering the 'public-pet-profile' view/template with the pet and owner data.
+
+            });
         })
         .catch(err => {
-            res.render("error", { message: "An error occurred. Please try again later." });
+            res.render("error", { message: err.message || "An error occurred. Please try again later." });
         });
 });
 
