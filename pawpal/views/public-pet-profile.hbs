@@ -4,7 +4,7 @@
     <div class="col-md-4">
       <!-- Pet Image Section -->
       <div class="border rounded shadow-sm p-3" style="background-color: #3b82f680; color:white">
-        <h3>Pet Profile</h3>
+        <h3>{{pet.name}}'s Profile</h3>
         <img class="img-fluid rounded" src="{{pet.photo}}" alt="{{pet.name}}">
       </div>
 
@@ -12,12 +12,31 @@
       <div class="border rounded shadow-sm p-3 mt-3" style="background-color: #3b82f680;color: white;">
         <h3>Details</h3>
         <p class="lead">
-          <strong>Name:</strong> {{pet.name}}<br>
           <strong>Animal:</strong> {{pet.animal}}<br>
           <strong>Breed:</strong> {{pet.breed}}<br>
           <strong>Age:</strong> {{pet.age}}<br>
           <strong>Temperament:</strong> {{pet.temperament}}<br>
           <strong>Health and Diet:</strong> {{pet.healthAndDiet}}<br>
+        </p>
+      </div>
+
+      <!-- Section for pet's owner -->
+      <div class="border rounded shadow-sm p-3 mt-3" style="background-color: white;">
+        <h3>My Parent</h3>
+        <p class="lead">
+          {{#if pet.owner}}
+            <h5>{{pet.owner.name}}</h5>
+
+            {{#if pet.owner.photo}}
+              <a href="/profile/{{pet.owner.username}}">
+                <img src="{{pet.owner.photo}}" alt="{{pet.owner.name}}" class="img-fluid" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover;">
+              </a>
+            {{else}}
+              <p>No photo available.</p>
+            {{/if}}
+          {{else}}
+            <p>No owner information available.</p>
+          {{/if}}
         </p>
       </div>
     </div>

@@ -210,19 +210,20 @@ router.post('/logout', isLoggedIn, (req, res, next) => {
 
 
 
-
 /* GET Public Pet Profile page */
 router.get("/pet/:_id", (req, res, next) => {
     const { _id } = req.params;
+
     Pet.findById(_id)
         .populate({
             path: 'comments',
             populate: {
-            path: 'author',
-            model: 'User',
-            select: 'username'
+                path: 'author',
+                model: 'User',
+                select: 'username',
             }
         })
+        .populate('owner') // Populate the 'owners' field
         .then(pet => {
             if (pet) {
                 res.render('public-pet-profile', { pet: pet.toObject() });
