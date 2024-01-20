@@ -210,11 +210,6 @@ router.post('/logout', isLoggedIn, (req, res, next) => {
 
 
 
-<<<<<<< HEAD
-
-=======
-/* GET Public Pet Profile page */
->>>>>>> c53a983badcb318c1d4d91bb5df113bc758e2af7
 router.get("/pet/:_id", (req, res, next) => {
     const { _id } = req.params;
 
@@ -224,14 +219,9 @@ router.get("/pet/:_id", (req, res, next) => {
             populate: {
                 path: 'author',
                 model: 'User',
-<<<<<<< HEAD
                 select: 'username'
-=======
-                select: 'username',
->>>>>>> c53a983badcb318c1d4d91bb5df113bc758e2af7
             }
         })
-        .populate('owner') // Populate the 'owners' field
         .then(pet => {
             if (!pet) {
                 throw new Error("Pet not found.");

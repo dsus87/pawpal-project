@@ -22,10 +22,6 @@ const petSchema = new Schema({
       type: String
     },
     healthAndDiet: String,
-    owner: {  // each pet has only one owner
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-    },
     
     comments: [{ 
       type: Schema.Types.ObjectId, 
