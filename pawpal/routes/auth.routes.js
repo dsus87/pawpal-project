@@ -174,7 +174,7 @@ router.post("/login",isLoggedOut, (req, res)=>{
           .then(match => {
               if (match) {
                 req.session.currentUser = user;
-                res.redirect(`auth/profile/${user.username}`); // interpolation /template literals // get route for render 
+                res.redirect(`/`); // interpolation /template literals // get route for render 
               } else {
                   console.log("Incorrect password.");
                   res.render('auth/login', { errorMessage: 'Incorrect email and/or password.' });
