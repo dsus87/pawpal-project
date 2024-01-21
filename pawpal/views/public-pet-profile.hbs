@@ -76,6 +76,7 @@
       </div>
 
       <!-- Section for 'Leave a Review' -->
+      {{#if currentUser}}
       <div class="border rounded shadow-sm p-3 mt-3" style="background-color: rgba(255, 255, 255, 0.6);">
         <h3>Leave a Review</h3>
         <form action="/pet/{{pet._id}}/comment" method="POST">
@@ -101,6 +102,7 @@
           </div>
         </form>
       </div>
+      {{/if}}
     </div>
   </div>
 </div>
