@@ -1,4 +1,20 @@
 <!-- Pet Profile Details -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-image: url('/images/background-pet-profile.png'); 
+            background-size: contain;
+            background-position: center;
+            background-repeat: repeat-y;
+        }
+    </style>
+</head>
+
+
 <div class="container">
   <div class="row">
     <div class="col-md-4">
@@ -21,7 +37,7 @@
       </div>
 
       <!-- Section for pet's owner -->
-      <div class="border rounded shadow-sm p-3 mt-3" style="background-color: white;">
+      <div class="border rounded shadow-sm p-3 mt-3" style="background-color: #3b82f680;color: white; ">
         <h3>My Parent</h3>
       <!-- Link to owner -->
 
@@ -44,7 +60,7 @@
     
 
       <!-- Section for 'User Reviews' -->
-      <div class="border rounded shadow-sm p-3 mt-3" style="background-color: white;">
+      <div class="border rounded shadow-sm p-3 mt-3" style="background-color: rgba(255, 255, 255, 0.6);">
         <div class="mt-3">
           <h3>Pet Reviews</h3>
           {{#each pet.comments}}
@@ -60,7 +76,7 @@
       </div>
 
       <!-- Section for 'Leave a Review' -->
-      <div class="border rounded shadow-sm p-3 mt-3" style="background-color: white;">
+      <div class="border rounded shadow-sm p-3 mt-3" style="background-color: rgba(255, 255, 255, 0.6);">
         <h3>Leave a Review</h3>
         <form action="/pet/{{pet._id}}/comment" method="POST">
           <div>
