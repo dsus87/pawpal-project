@@ -79,8 +79,8 @@ p {
 
 
 .connect-image img {
-  max-width: 50%;
-  max-height: 50%;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .choose-service-image {
@@ -91,8 +91,8 @@ p {
 }
 
 .choose-service-image img {
-  max-width: 50%;
-  max-height: 50%;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 
@@ -104,8 +104,8 @@ p {
 }
 
 .meet-greet-image img {
-  max-width: 50%;
-  max-height: 50%;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .verified-image {
@@ -116,7 +116,7 @@ p {
 }
 
 .verified-image img {
-  max-width: 50%;
-  max-height: 50%;
+  max-width: 100%;
+  max-height: 100%;
 }
 
