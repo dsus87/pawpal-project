@@ -208,8 +208,7 @@ router.post('/logout', isLoggedIn, (req, res, next) => {
     });
 });
 
-
-
+/* GET Public Pet Page */
 router.get("/pet/:_id", (req, res, next) => {
     const { _id } = req.params;
 
@@ -226,17 +225,20 @@ router.get("/pet/:_id", (req, res, next) => {
             if (!pet) {
                 throw new Error("Pet not found.");
             }
+
             // Find the owner of the pet by searching the 'User' collection where the pet's id is listed under 'pets'.
-
-            return User.findOne({ pets: _id }).select('username email location').then(owner => {  
-                res.render('public-pet-profile', { pet: pet.toObject(), owner });   // Rendering the 'public-pet-profile' view/template with the pet and owner data.
-
+            return User.findOne({ pets: _id }).select('username email location')
+            .then(owner => {
+                console.log(JSON.stringify(pet, null, 2)); // Log to check the pet object
+                res.render('public-pet-profile', { pet: pet.toObject(), owner }); // Render the page with pet and owner data
             });
         })
         .catch(err => {
             res.render("error", { message: err.message || "An error occurred. Please try again later." });
         });
 });
+
+
 
 
 
@@ -446,7 +448,7 @@ router.post('/pet/:petId/comment', isLoggedIn, (req, res, next) => {
         .then(savedComment => {
             // Update the pet's document with the new comment ID
             return Pet.findByIdAndUpdate(pet._id,
-                { $push: { reviews: savedComment._id } },
+                { $push: { comments: savedComment._id } },
             );
         })
         .then(() => {
