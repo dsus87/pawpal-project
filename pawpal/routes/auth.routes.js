@@ -25,6 +25,12 @@ router.post("/signup", isLoggedOut, fileUploader.single('photo'), (req, res, nex
     const { username, email, password, name, location, role, availability, services, pets, reviews} = req.body;
     console.log(req.body)
 console.log(req.file)
+
+
+if (!password || password === '') {
+    return res.render("auth/signup", { errorMessage: "Please enter a password." });
+}
+
     User.findOne({ username: username })
     .then(user => {
         if (user) {
