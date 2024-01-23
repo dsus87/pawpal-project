@@ -85,21 +85,87 @@
         </div>
 
 
+     {{!-- <!-- Select Role Section -->
+            <div class="row">
+                <div class="col">    
+                    <div class="text-start mb-3">
+                        <h5 class="mb-3">Select your role</h5>
+                        <select class="form-select" name="role" id="roleSelect">
+                            <option value="">Choose...</option>
+                            <option value="Pet Sitter" {{#if (eq role "Pet Sitter")}}selected{{/if}}>Pet Sitter</option>
+                            <option value="Pet Owner" {{#if (eq role "Pet Owner")}}selected{{/if}}>Pet Owner</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Conditional Sections for Pet Sitter -->
+            {{#if (eq role "Pet Sitter")}}
+                <!-- Price Section -->
+                <div class="row">
+                    <div class="col">
+                        <div class="text-start mb-3">
+                            <h5 class="mb-3">What is your price per hour in €?</h5>
+                            <input type="number" class="form-control" placeholder="Price per hour" id="price" name="price" min="0" step="0.01" aria-label="Price per hour">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Section -->
+                <div class="row">
+                    <div class="col">
+                        <div class="text-start mb-3">
+                            <h5 class="mb-3">Which services do you offer?</h5>
+                            <input type="checkbox"class="form-check-input"  id="Pet Boarding" name="services" value="Pet Boarding">
+                            <label for="Pet Boarding">Pet Boarding</label>
+                            <input type="checkbox" class="form-check-input" id="Dog Walking" name="services" value="Dog Walking">
+                            <label for="Dog Walking">Dog Walking</label>
+                            <input type="checkbox" class="form-check-input" id="Pet Sitting" name="services" value="Pet Sitting">
+                            <label for="Pet Sitting">Pet Sitting</label>
+                        </div>
+                    </div>
+                </div>
+            {{/if}} --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      <!-- Row 7 -->   
 
-{{#unless (eq user.role "Pet Owner")}}
 
-     <div class="row">
+
+    <div class="row">
     <div class="col">
         <div class="text-start mb-3">
             <h5 class="mb-3">What is your price per in € hour?</h5>
-            <input type="number" class="form-control" placeholder="Price per hour" id="price" name="price" min="0" step="0.01" aria-label="Price per hour">
+            <input type="number" class="form-control" placeholder=" € {{price}}" id="price" name="price" min="0" step="0.01" aria-label="Price per hour">
         </div>
     </div>
-</div>
+</div> 
 
 
-        <!-- Row 7 -->   
+   <!-- Row 7 -->   
 
         <div class="row">
             <div class="col">
@@ -113,17 +179,17 @@
                     <label for="Pet Sitting">Pet Sitting</label>
                 </div>
             </div>
-        </div>
+        </div> 
 
-  {{/unless}}
+ 
         
-        <!-- Row 8 -->
+   <!-- Row 8 -->
         <div class="row">
     <div class="col">    
         <div class="text-start mb-3">
             <h5 class="mb-3">Select your role</h5>
             <select class="form-select" name="role">
-                <option value="">Choose...</option>
+                <option value="">{{role}}</option>
                 <option value="Pet Sitter">Pet Sitter</option>
                 <option value="Pet Owner">Pet Owner</option>
             </select>
@@ -144,6 +210,10 @@
         </div>
     </div>
 </div>
+
+
+
+
 
 
 

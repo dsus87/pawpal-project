@@ -22,7 +22,12 @@
              <strong>🖊️ Name:</strong> {{name}}<br>
              <strong>📧 Email:</strong> {{email}}<br>
              <strong>🌎 Location:</strong> {{location}}<br>
-             <strong>📅Availability</strong> {{availability}}<br>
+            <strong>📅 Availability</strong> 
+                              {{#if availability}}
+                                  Yes
+                              {{else}}
+                                  No
+                              {{/if}}<br>
       </p>
       </div>
 
