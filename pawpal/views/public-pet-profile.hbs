@@ -1,20 +1,4 @@
 <!-- Pet Profile Details -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            background-image: url('/images/background-pet-profile.png'); 
-            background-size: contain;
-            background-position: center;
-            background-repeat: repeat-y;
-        }
-    </style>
-</head>
-
-
 <div class="container">
   <div class="row">
     <div class="col-md-4">
@@ -28,11 +12,11 @@
       <div class="border rounded shadow-sm p-3 mt-3" style="background-color: #3b82f680;color: white;">
         <h3>Details</h3>
         <p class="lead">
-          <strong>Animal:</strong> {{pet.animal}}<br>
-          <strong>Breed:</strong> {{pet.breed}}<br>
-          <strong>Age:</strong> {{pet.age}}<br>
-          <strong>Temperament:</strong> {{pet.temperament}}<br>
-          <strong>Health and Diet:</strong> {{pet.healthAndDiet}}<br>
+          <strong>{{#if (eq pet.animal 'Dog')}}🐶{{else}}🐱{{/if}} Animal:</strong> {{pet.animal}}<br>
+          <strong>🐾 Breed:</strong> {{pet.breed}}<br>
+          <strong>👶 Age:</strong> {{pet.age}}<br>
+          <strong>{{#if (eq pet.temperament "Energetic")}}🚀{{else if (eq pet.temperament "Playful")}}🎉{{else}}💤{{/if}} Temperament:</strong> {{pet.temperament}}<br>
+          <strong>🥦 Health and Diet:</strong> {{pet.healthAndDiet}}<br>
         </p>
       </div>
 
@@ -41,7 +25,7 @@
         <h3>My Parent</h3>
       <!-- Link to owner -->
 
-        <strong>Owner:</strong> <a href="/profile/{{owner.username}}" style="color: #ffcc00;">{{owner.username}}</a><br>
+        <strong>Owner:</strong> <a href="/profile/{{owner.username}}" style="color: #f4ee2c;">{{owner.username}}</a><br>
 
 
         </p>
@@ -52,7 +36,7 @@
     <div class="col-md-8">
       <!-- Section for 'About me' -->
       <div class="border rounded shadow-sm p-3 mt-3" style="background-color: white;">
-        <h3>About Me</h3>
+        <h3>About {{pet.name}} 🐾</h3>
         <p class="lead">{{pet.about}}</p>
 
       </div>
