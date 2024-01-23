@@ -255,10 +255,10 @@ router.get("/auth/pet-signup", isLoggedIn, (req, res, next) => {
 
 /* Register a new Pet (private) page */  
 router.post("/auth/pet-signup", isLoggedIn, fileUploader.single('photo'), (req, res, next) => {
-    const { name, animal, breed, age, temperament, about, healthAndDiet } = req.body;
+    const { name, animal, breed, age, temperament, about, healthAndDiet,location } = req.body;
     let createdPetId;
 
-    const petData = { name, animal, breed, age, temperament, about, healthAndDiet };
+    const petData = { name, animal, breed, age, temperament, about, healthAndDiet,location };
 
     if (req.file) {
         petData.photo = req.file.path;
@@ -300,9 +300,9 @@ router.get("/auth/pet-profile/:_id", isLoggedIn, (req, res, next) => {
 /* Edit a Pet (private) page */  
 router.post("/auth/pet-profile", isLoggedIn, fileUploader.single('photo'), (req, res, next) => {
     console.log(req.body)
-    const { name, animal, breed, age, temperament, about, healthAndDiet, _id } = req.body;
+    const { name, animal, breed, age, temperament, about, healthAndDiet, _id, location } = req.body;
 
-    const petData = { name, animal, breed, age, temperament, about, healthAndDiet };
+    const petData = { name, animal, breed, age, temperament, about, healthAndDiet,location };
 
     if (req.file) {
         petData.photo = req.file.path;
@@ -369,13 +369,16 @@ router.get("/all-sitters", (req, res, next) => {
 /* GET - Pets with Filters */
 router.get("/find-my-pet", (req, res, next) => {
     let query = {};
-    const { animal, temperament } = req.query;
+    const { animal, temperament, location } = req.query;
 
     if (animal) {
         query.animal = animal;
     }
     if (temperament) {
         query.temperament = temperament;
+    }
+    if (location) {
+        query.location = location;
     }
    
     Pet.find(query)

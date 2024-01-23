@@ -30,7 +30,7 @@ const userSchema = new Schema(
     
     location: { 
       type: String, 
-      enum: ['Berlin', 'Amsterdam', 'Portugal'],
+      enum: ['Berlin', 'Amsterdam', 'Lisbon'],
     },
 
     photo:{ 

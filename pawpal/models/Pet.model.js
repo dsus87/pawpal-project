@@ -26,7 +26,12 @@ const petSchema = new Schema({
     comments: [{ 
       type: Schema.Types.ObjectId, 
       ref: 'Comment' 
-    }]
+    }],
+
+    location: { 
+      type: String, 
+      enum: ['Berlin', 'Amsterdam', 'Lisbon'],
+    },
     
   });
   
