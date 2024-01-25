@@ -24,7 +24,7 @@ router.get("/signup",isLoggedOut, (req, res, next) => {
 router.post("/signup", isLoggedOut, fileUploader.single('photo'), (req, res, next) => {
     const { username, email, password, name, location, role, availability, services, pets, reviews} = req.body;
     console.log(req.body)
-console.log(req.file)
+    console.log(req.file)
 
 
 if (!password || password === '') {
