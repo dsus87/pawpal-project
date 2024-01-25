@@ -11,6 +11,8 @@ const Pet = require("../models/Pet.model");
 const Comment = require("../models/Comment.model");
 
 
+
+
 const { isLoggedIn, isLoggedOut } = require('../middlewares/route-guard');
 
 
@@ -112,6 +114,33 @@ router.post('/update-profile', isLoggedIn, fileUploader.single('photo'), (req, r
             res.render("error", { message: "An error occurred during the update." });
         });
 });
+
+
+
+/* DELETE User Profile */
+router.get("/auth/delete-profile/:_id", isLoggedIn, (req, res, next) => {
+    const { _id } = req.params;
+
+    if (req.session.currentUser._id !== _id) {
+        return res.status(403).render("error", { message: "Unauthorized to delete this profile." });
+    }
+
+    User.findOneAndDelete({ _id })
+        .then((deletedUser) => {
+            if (!deletedUser) {
+                return res.status(404).render("error", { message: "User not found." });
+            }
+
+            req.session.destroy(() => {
+                res.redirect('/'); // Redirect to the home page or login page
+            });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).render("error", { message: "An error occurred while deleting the profile." });
+        });
+});
+
 
 
 

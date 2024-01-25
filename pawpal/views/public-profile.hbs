@@ -108,9 +108,11 @@
   {{#each reviews}}
     <div class="border rounded shadow-sm p-3 my-3" style="background-color: white;">
       <p class="lead">
-        <strong>Comment by:</strong> {{this.author.username}}<br>
-        <strong>Content:</strong> {{this.content}}<br>
-        <strong>Rating:</strong> {{this.rating}}/5
+       
+         {{this.content}} <br>
+          <br>
+        <strong>Rating:</strong> {{this.rating}}/5 <br>
+         <strong>Comment by:</strong> {{this.author.username}}<br>
       </p>
     </div>
   {{/each}}
